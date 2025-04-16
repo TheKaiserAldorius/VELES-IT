@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://Veles-it.ru/sitemap.xml

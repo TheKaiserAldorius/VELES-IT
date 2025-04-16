@@ -1,0 +1,580 @@
+:root {
+  /* Цветовая схема */
+  --primary-dark: #1a1d24;
+  --primary-dark-80: #2a2d34;
+  --primary-dark-60: #3a3d44;
+  --primary-dark-40: #4a4d54;
+  --primary-dark-20: #5a5d64;
+  --accent-primary: #00b4d8;
+  --accent-secondary: #f94144;
+  --accent-tertiary: #90be6d;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #d1d5db;
+  --bg-primary: var(--primary-dark);
+  --bg-secondary: #12151c;
+  --bg-tertiary: #0e1118;
+  --card-bg: rgba(26, 29, 36, 0.9);
+  --card-hover: rgba(42, 45, 52, 0.95);
+  --border-primary: rgba(0, 216, 0, 0.3);
+  --border-secondary: rgba(255, 255, 255, 0.1);
+  --shadow-primary: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 4px 20px rgba(0, 180, 216, 0.3);
+  
+}
+
+/* Базовые стили */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.content {
+  flex: 1;
+  padding-top: var(--navbar-height);
+  margin-left: 80px;
+}
+/* ====================== */
+/* Flashlight Effect Styles */
+/* Flashlight Effect */
+/* Flashlight Effect */
+.hero-section {
+  position: relative;
+  background: url(/public/background.png) center/cover no-repeat;
+  color: var(--text-primary);
+  padding: 12rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-spotlight-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 250px at var(--x, -100px) var(--y, -100px),
+    transparent 0%,
+    rgba(0, 0, 0, 1) 80%
+  );
+  z-index: 6;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+.hero-content{
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  margin-bottom: 2.5rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+  line-height: 1.8;
+}
+
+/* Секции */
+.section {
+  padding: 6rem 2rem;
+  text-align: center;
+  
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  color: var(--text-primary);
+}
+
+.section-header h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--accent-primary);
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  font-size: 1.1rem;
+}
+
+/* Карточки */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-secondary);
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: var(--card-hover);
+  box-shadow: var(--shadow-primary);
+  border-color: var(--border-primary);
+}
+
+/* Герой секция */
+.hero-section {
+  position: relative;
+  background: url(/public/background.png) center/cover no-repeat;
+  color: var(--text-primary);
+  padding: 12rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-content {
+  z-index: 3;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  margin-bottom: 2.5rem;
+  color: var(--text-secondary);
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Кнопки */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #34c924;
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: var(--primary-dark);
+}
+
+.hero-calculate-btn {
+  background: #34c924;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 700px;
+  height: 70px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2.5rem;
+  animation: fadeIn 1s ease-in-out 0.6s forwards;
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  
+  /* Плавные переходы для всех анимируемых свойств */
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.3s ease;
+}
+
+.hero-calculate-btn:hover {
+  transform: translateY(-5px); /* Увеличиваем подъем */
+  box-shadow: 
+    0 15px 30px rgba(52, 201, 36, 0.4), /* Более мягкая тень */
+    0 5px 15px rgba(52, 201, 36, 0.3); /* Многослойная тень */
+  background-color: #2db320; /* Легкое изменение цвета */
+}
+
+.hero-calculate-btn:active {
+  transform: translateY(-2px); /* Эффект нажатия */
+}
+
+.hero-calculate-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.25), 
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.7s ease-in-out; /* Более плавное движение */
+  z-index: 1; /* Поднимаем над основным фоном */
+  pointer-events: none; /* Чтобы не мешало кликам */
+}
+
+.hero-calculate-btn:hover::before {
+  transform: translateX(100%);
+}
+
+/* Улучшенная анимация появления */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Эффекты */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 220px at var(--x, -200px) var(--y, -200px),
+    transparent 0%,
+    rgba(0, 0, 0, 0.909) 40%
+  );
+  z-index: 1;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Специфичные стили компонентов */
+.service-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.service-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  margin: 1rem 0;
+}
+.team-section {
+  margin-bottom: 200px;
+}
+
+.team-grid {
+  display: flex; /* Изменено на flex */
+  justify-content: center; /* Центрируем по горизонтали */
+  gap: 40px; /* Расстояние между карточками */
+  flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
+}
+
+.team-card {
+  display: flex; /* Добавлено */
+  flex-direction: column; /* Элементы в колонку */
+  align-items: center; /* Центрируем по горизонтали */
+  max-width: 200px; /* Ограничиваем ширину карточки */
+  text-align: center; /* Текст по центру */
+}
+
+.team-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1.5rem;
+  border: 3px solid #34c924;;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-position {
+  color: #16af05;;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .team-grid {
+    flex-direction: column; /* В колонку на мобильных */
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .team-card {
+    margin-bottom: 30px;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .hero-section {
+    padding: 8rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .hero-section {
+    padding: 6rem 1.5rem;
+    min-height: auto;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 5rem 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Задержки анимаций для карточек */
+.service-card:nth-child(1),
+.case-card:nth-child(1),
+.team-card:nth-child(1) { animation-delay: 0.1s; }
+
+.service-card:nth-child(2),
+.case-card:nth-child(2),
+.team-card:nth-child(2) { animation-delay: 0.2s; }
+
+.service-card:nth-child(3),
+.case-card:nth-child(3),
+.team-card:nth-child(3) { animation-delay: 0.3s; }
+
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  margin-left: 80px;
+}
+/* Стили для блока услуг */
+/* Явные стили для гарантии видимости */
+.services-section1 {
+  background-color: var(--bg-secondary);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.services-grid1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.service-card1 {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-secondary);
+  text-align: center;
+  opacity: 1 !important; /* Гарантируем видимость */
+  animation: none !important; /* Отключаем анимацию для теста */
+}
+
+.service-card1:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-primary);
+  border-color: #34c924;;
+}
+
+.service-image img {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+  background: #fff; /* Добавим фон для изображений */
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.service-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  margin: 1rem 0;
+}
+
+.service-order-btn {
+  background: #34c924a3;;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.service-order-btn:hover {
+  background: #34c924;
+}
+.project-details-btn{
+  background: #34c9249e;;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.project-details-btn:hover{
+  background-color: #34c924;
+}
+
+.contact-info{
+  color: white;
+  margin-left:100px;
+  text-align: start;
+
+}

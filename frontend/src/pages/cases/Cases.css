@@ -1,0 +1,234 @@
+/* pages/cases/Cases.css */
+.cases-page {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+  
+  .cases-hero {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-dark-80));
+    color: white;
+    padding: 8rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-primary);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .cases-hero .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  .cases-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    text-shadow: var(--shadow-primary);
+  }
+  
+  .cases-hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeIn 1s ease-in-out 0.3s forwards;
+    opacity: 0;
+    line-height: 1.8;
+  }
+  
+  .cases-section {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
+  }
+  
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .cases-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .cases-header h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+  }
+  
+  .cases-header h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--accent-primary);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+  
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .case-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-secondary);
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .case-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-primary);
+    border-color: var(--border-primary);
+  }
+  
+  .case-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--primary-dark-40);
+  }
+  
+  .case-content {
+    padding: 1.5rem;
+  }
+  
+  .case-content h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .case-content p {
+    margin: 0 0 1rem 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  .case-result {
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: rgba(0, 180, 216, 0.1);
+    border-left: 3px solid var(--accent-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+  }
+  
+  .case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .case-tag {
+    background: rgba(0, 180, 216, 0.2);
+    color: var(--accent-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .cta-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background-color: var(--bg-secondary);
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  
+  /* Анимации для карточек с задержкой */
+  .case-card:nth-child(1) { animation-delay: 0.1s; }
+  .case-card:nth-child(2) { animation-delay: 0.2s; }
+  .case-card:nth-child(3) { animation-delay: 0.3s; }
+  .case-card:nth-child(4) { animation-delay: 0.4s; }
+  .case-card:nth-child(5) { animation-delay: 0.5s; }
+  .case-card:nth-child(6) { animation-delay: 0.6s; }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .cases-hero {
+      padding: 6rem 2rem;
+    }
+    
+    .cases-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cases-hero {
+      padding: 5rem 1.5rem;
+    }
+    
+    .cases-hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .cases-section, .cta-section {
+      padding: 4rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cases-hero {
+      padding: 4rem 1rem;
+    }
+    
+    .cases-hero h1 {
+      font-size: 2rem;
+    }
+    
+    .cases-header h2 {
+      font-size: 2rem;
+    }
+    
+    .cta-section h2 {
+      font-size: 2rem;
+    }
+  }
+  
