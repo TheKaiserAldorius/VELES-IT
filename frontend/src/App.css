@@ -432,6 +432,10 @@ html, body {
     align-items: center;
     gap: 30px;
   }
+  .content {
+    margin-left: 0;
+    padding-top: var(--navbar-mobile-height);
+  }
   
   .team-card {
     margin-bottom: 30px;
@@ -443,11 +447,19 @@ html, body {
   .hero-section {
     padding: 8rem 2rem;
   }
+  .content {
+    margin-left: 0;
+    padding-top: var(--navbar-mobile-height);
+  }
 }
 
 @media (max-width: 768px) {
   .section {
     padding: 4rem 1.5rem;
+  }
+  .content {
+    margin-left: 0;
+    padding-top: var(--navbar-mobile-height);
   }
   
   .hero-section {
