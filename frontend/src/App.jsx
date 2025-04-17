@@ -20,6 +20,7 @@ import ClientsPage from 'pages/clients/Clients';
 import CasesPage from 'pages/cases/Cases';
 import ItHomesPage from 'pages/ItHomes/ItHomes';
 import FlashlightEffect from './components/FlashlightEffect';
+import AdminPage from'pages/AdminPage';
 import './App.css';
 
 // Карточка услуги (обновленная по ТЗ)
@@ -254,6 +255,7 @@ function App() {
           <Route path="/cases" element={<CasesPage />} />
           <Route path="/ItHomes" element={<ItHomesPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route PATH="/AdminPage" element={<AdminPage />}/>
         </Routes>
       </main>
       <footer className="footer">

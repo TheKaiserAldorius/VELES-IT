@@ -21,17 +21,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     
-    # Ваши приложения
+    # Мои приложения
     'telegram_form',
     'user_profile',
     'academy',
+    'trello_abacus',
     # 'main',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Должен быть как можно выше
+    'corsheaders.middleware.CorsMiddleware',  #корс
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,7 +57,7 @@ TEMPLATES = [
         },
     },
 ]
-
+#поменяю потом на постргесс
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -135,11 +136,13 @@ SIMPLE_JWT = {
 TELEGRAM_BOT_TOKEN = '7836391314:AAEH2IedyXcNKYpdnjeIWhSsh6GAINNEW-4'
 TELEGRAM_CHAT_ID = '-1002632439429'
 
-# Trello
+
+# Настройки Trello и Abacus
 TRELLO_API_KEY = "ea5b03ece4ac7fa0b2e979d6a474a9fa"
-TRELLO_TOKEN = "ATTAcafce86412b8b74e0e2f61adf06fe674bbc60af332ae90a81300a71d4443b44949004115"
-TRELLO_BOARD_ID = "l7CoROsH"
-TRELLO_DEFAULT_LIST = "Новые заявки"
+TRELLO_API_TOKEN = "ATTAcafce86412b8b74e0e2f61adf06fe674bbc60af332ae90a81300a71d4443b44949004115"
+TRELLO_BOARD_ID = "cnjWPZl4"
+ABACUS_API_KEY = "s2_9cdacf98f9b9449d871e7cfce9eea54a"
+ABACUS_API_URL = "https://api.abacus.ai/v1/chat"
 
 AWS_STORAGE_BUCKET_NAME = 'ваш-bucket'
 AWS_S3_REGION_NAME = 'eu-west-1'

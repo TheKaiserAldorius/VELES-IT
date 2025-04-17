@@ -37,6 +37,7 @@ export default function Navbar() {
     { name: "Веб-академия", path: "/academy", animation: academyAnimation, id: "academy" },
     { name: "IT деревня", path: "/ItHomes", animation: villageAnimation, id: "village" },
     { name:"Контакты", path: "/Contacts", animation: contactAnim, id: "contact"}
+    
   
   ];
 
