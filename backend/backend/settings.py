@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'user_profile',
     'academy',
     'trello_abacus',
-    # 'main',
+    'admin_interface',
+    'colorfield',
 ]
 
 MIDDLEWARE = [

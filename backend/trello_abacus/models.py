@@ -17,3 +17,10 @@ class AbacusLog(models.Model):
 
     def __str__(self):
         return f"{self.task} — {self.created_at}"
+    # Для TrelloBoard
+def __str__(self):
+    return f"{self.name} ({self.board_id})"
+
+# Для AbacusLog
+def __str__(self):
+    return f"{self.task} - {self.created_at.date()}"

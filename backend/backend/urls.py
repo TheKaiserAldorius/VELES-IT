@@ -33,7 +33,7 @@ def load_services_data():
     """Загрузка данных из services.json"""
     try:
         base_dir = Path(__file__).resolve().parent.parent  # Получаем backend/backend/
-        file_path = base_dir / "core" / "data" / "services.json"
+        file_path = base_dir / "datacollcore" / "data" / "services.json"
         logger.info(f"Пытаюсь загрузить файл услуг по пути: {file_path}")
         
         with open(file_path, encoding='utf-8') as f:
@@ -88,14 +88,6 @@ def calculate_price(request):
         logger.error("Ошибка расчета: %s", str(e))
         return JsonResponse({"error": str(e)}, status=500)
 
-try:
-    from core.routes.urls import urlpatterns as core_urls
-    trello_routes = path('api/trello/', include(core_urls))
-except ImportError as e:
-    logger.warning("Не удалось загрузить маршруты Trello: %s", str(e))
-    trello_routes = path('api/trello/', lambda r: JsonResponse(
-        {"error": "Trello API временно недоступно"}, status=503))
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('telegram/', include('telegram_form.urls')),
@@ -107,5 +99,6 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/v1/services/', get_services, name='services-list'),
     path('api/v1/calculate/', calculate_price, name='calculate-price'),
-    trello_routes,
+    path('api/trello/', include('trello_abacus.urls')),
 ]
+trello_routes = path('api/trello/', include('trello_abacus.urls'))
