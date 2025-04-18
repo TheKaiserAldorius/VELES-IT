@@ -9,7 +9,6 @@ import csv
 import openpyxl
 from io import BytesIO
 import json
-from datetime import timedelta
 
 # Модель для кеширования досок Trello
 class TrelloBoard(models.Model):
@@ -96,12 +95,12 @@ class Media:
     css = {
         'all': (
             'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
-            'admin/css/trello_admin.css',
+            '/static/admin/css/trello_admin.css',  # Добавлен слеш
         )
     }
     js = (
         'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-        'admin/js/trello_admin.js',
+        '/static/admin/js/trello_admin.js',
     )
 
     def preview_iframe(self, obj):

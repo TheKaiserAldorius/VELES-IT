@@ -89,8 +89,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend/build/static'),
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),  # Для кастомных статических файлов
+    os.path.join(BASE_DIR, '../frontend/build/static'),  # React статика
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  # Базовые шаблоны
+            os.path.join(BASE_DIR, '../frontend/build'),  # React шаблоны
+        ],
+        'APP_DIRS': True,
+    },
 ]
 
 MEDIA_URL = '/media/'
