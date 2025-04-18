@@ -1,0 +1,221 @@
+/* admin/css/trello_admin.css */
+
+/* Основные стили */
+#content {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Заголовки */
+h1 {
+    color: #172b4d;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Карточки досок */
+.module {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+    margin-bottom: 20px;
+    border: none;
+}
+
+/* Кнопки Trello */
+.button.trello {
+    background: #ffffff;
+    color: #172b4d;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #dfe1e6;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 1px rgba(9, 30, 66, 0.1);
+}
+
+.button.trello:hover {
+    background: #ebecf0;
+    color: #172b4d;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(9, 30, 66, 0.1);
+}
+
+.button.add-card {
+    background: #61BD4F;
+    color: white;
+    border-color: #61BD4F;
+}
+
+.button.add-card:hover {
+    background: #5aac44;
+    color: white;
+}
+
+.button.settings {
+    background: #026AA7;
+    color: white;
+    border-color: #026AA7;
+}
+
+.button.settings:hover {
+    background: #055a8c;
+    color: white;
+}
+
+.button.json {
+    background: #ff9f1a;
+    color: white;
+    border-color: #ff9f1a;
+}
+
+.button.json:hover {
+    background: #e68a00;
+    color: white;
+}
+
+/* Предпросмотр доски */
+iframe.trello-preview {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #dfe1e6;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(9, 30, 66, 0.1);
+    transition: all 0.3s ease;
+}
+
+iframe.trello-preview:hover {
+    box-shadow: 0 3px 10px rgba(9, 30, 66, 0.1);
+}
+
+/* Бейджи статусов */
+.badge.trello-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.bg-success {
+    background-color: #61BD4F !important;
+}
+
+.badge.bg-danger {
+    background-color: #EB5A46 !important;
+}
+
+.badge.bg-warning {
+    background-color: #F2D600 !important;
+    color: #172b4d !important;
+}
+
+.badge.bg-secondary {
+    background-color: #dfe1e6 !important;
+    color: #172b4d !important;
+}
+
+.badge.bg-dark {
+    background-color: #172b4d !important;
+}
+
+/* Таблицы */
+#result_list {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#result_list th, #result_list td {
+    border-color: #dfe1e6;
+}
+
+#result_list th {
+    background-color: #f4f5f7;
+    color: #5e6c84;
+    font-weight: 600;
+}
+
+#result_list tr:hover td {
+    background-color: #f4f5f7;
+}
+
+/* Формы */
+input, textarea, select {
+    border: 1px solid #dfe1e6 !important;
+    border-radius: 4px !important;
+    padding: 8px 12px !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #4c9aff !important;
+    box-shadow: 0 0 0 2px rgba(76, 154, 255, 0.3) !important;
+}
+
+/* Кнопки действий */
+.btn {
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary {
+    background-color: #0052cc !important;
+    border-color: #0052cc !important;
+}
+
+.btn-success {
+    background-color: #61BD4F !important;
+    border-color: #61BD4F !important;
+}
+
+.btn-danger {
+    background-color: #EB5A46 !important;
+    border-color: #EB5A46 !important;
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+    background: transparent !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+    border: none !important;
+}
+
+/* Логи Abacus */
+.field-result_preview pre {
+    white-space: pre-wrap;
+    background: #f4f5f7;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 3px solid #4c9aff;
+}
+
+.field-full_result pre {
+    max-height: 500px;
+    overflow: auto;
+    background: #f4f5f7;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 3px solid #4c9aff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .button.trello {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    iframe.trello-preview {
+        height: 250px;
+    }
+}
