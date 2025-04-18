@@ -1,0 +1,22 @@
+
+.button.trello {
+    background: #026AA7;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button.trello:hover {
+    background: #055A8C;
+}
+
+.button.add-card {
+    background: #61BD4F;
+}
+
+.button.add-card:hover {
+    background: #519839;
+}
