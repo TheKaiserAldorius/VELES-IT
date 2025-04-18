@@ -1,7 +1,7 @@
 
 .button.trello {
-    background: #026AA7;
-    color: white;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
     padding: 8px 12px;
     border-radius: 4px;
     text-decoration: none;
@@ -19,4 +19,7 @@
 
 .button.add-card:hover {
     background: #519839;
+}
+.body{
+    color: black;
 }

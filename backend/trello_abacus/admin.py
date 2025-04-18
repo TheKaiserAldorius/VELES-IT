@@ -260,5 +260,5 @@ admin.site.register(AbacusLog, AbacusLogAdmin)
 # Настройки админки
 admin.site.site_header = "VELES-IT Admin"
 admin.site.site_title = "Административная панель VELES-IT"
-admin.site.index_title = "хцй"
+admin.site.index_title = "Управление проектом"
 admin.site.empty_value_display = "-пусто-"
