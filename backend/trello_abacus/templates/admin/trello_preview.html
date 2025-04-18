@@ -1,0 +1,19 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="trello-sync">
+    <h1>Trello Sync</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button trello">Sync Now</button>
+    </form>
+    
+    {% if trello_board_id %}
+    <div class="trello-preview">
+        <h3>Board Preview</h3>
+        <iframe src="https://trello.com/b/{{ trello_board_id }}.html" 
+                class="trello-preview-frame"></iframe>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

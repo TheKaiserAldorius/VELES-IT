@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="abacus-query">
+    <h1>Abacus AI Query</h1>
+    
+    <div class="query-form">
+        <textarea id="query-input" placeholder="Enter your prompt..."></textarea>
+        <button id="submit-query" class="button json">Submit</button>
+    </div>
+    
+    <div id="response-area" class="response-area"></div>
+    
+    <h3>Recent Queries</h3>
+    <ul class="query-history">
+        {% for query in recent_queries %}
+        <li>
+            <strong>{{ query.created_at|date:"Y-m-d H:i" }}:</strong>
+            {{ query.query|truncatechars:80 }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const submitBtn = document.getElementById('submit-query');
+    const queryInput = document.getElementById('query-input');
+    const responseArea = document.getElementById('response-area');
+    
+    submitBtn.addEventListener('click', function() {
+        const prompt = queryInput.value.trim();
+        if (!prompt) return;
+        
+        submitBtn.disabled = true;
+        responseArea.innerHTML = '<p>Processing...</p>';
+        
+        fetch("{% url 'myadmin:abacus-query' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: `prompt=${encodeURIComponent(prompt)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                responseArea.innerHTML = `<pre>${JSON.stringify(data.response, null, 2)}</pre>`;
+            } else {
+                responseArea.innerHTML = `<p class="error">Error: ${data.message}</p>`;
+            }
+        })
+        .catch(error => {
+            responseArea.innerHTML = `<p class="error">Request failed: ${error}</p>`;
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+        });
+    });
+});
+</script>
+{% endblock %}

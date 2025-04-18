@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="media-player">
+    <h1>Media Player</h1>
+    
+    <div class="player-container">
+        <audio controls id="main-player"></audio>
+    </div>
+    
+    <div class="playlist">
+        <h3>Available Files</h3>
+        <ul>
+            {% for file in media_files %}
+            <li data-src="{{ file.file.url }}">
+                {{ file.name }}
+                <span class="file-type">{{ file.file.name|slice:'-4:' }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const player = document.getElementById('main-player');
+    const files = document.querySelectorAll('.playlist li');
+    
+    files.forEach(file => {
+        file.addEventListener('click', function() {
+            player.src = this.getAttribute('data-src');
+            player.play();
+            files.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -9,12 +9,21 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
+from django.conf import settings
 import json
 from pathlib import Path
 import logging
 import os
 
 logger = logging.getLogger(__name__)
+
+# Импортируем кастомную админку только если она есть
+try:
+    from trello_abacus.admin import admin_site as custom_admin_site
+    ADMIN_SITE = custom_admin_site
+except ImportError:
+    ADMIN_SITE = admin.site
+    logger.warning("Custom admin site not found, using default admin")
 
 def api_welcome(request):
     return JsonResponse({
@@ -70,7 +79,6 @@ def calculate_price(request):
         if error:
             return JsonResponse({"error": error}, status=404)
         
-
         for service in services:
             if service["Услуга"] == data.get("service") and service["Подкатегория"] == data.get("subcategory"):
                 price = service["Базовая цена"]
@@ -89,16 +97,33 @@ def calculate_price(request):
         return JsonResponse({"error": str(e)}, status=500)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('telegram/', include('telegram_form.urls')),
-    path('profile/', include('user_profile.urls')),
-    path('api/', api_welcome),
+    # Основные URL
     path('', TemplateView.as_view(template_name='index.html')),
+    path('api/', api_welcome, name='api-root'),
+    
+    # Аутентификация
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    
+    # API эндпоинты
     path('api/v1/services/', get_services, name='services-list'),
     path('api/v1/calculate/', calculate_price, name='calculate-price'),
-    path('api/trello/', include('trello_abacus.urls')),
+    
+    # Приложения
+    path('telegram/', include('telegram_form.urls')),
+    path('profile/', include('user_profile.urls')),
+    
+    # Админка (используем кастомную если доступна)
+    path('admin/', ADMIN_SITE.urls),
+    
+    # Стандартная админка для fallback
+    path('django-admin/', admin.site.urls),
 ]
-trello_routes = path('api/trello/', include('trello_abacus.urls'))
+
+# Добавляем debug toolbar для разработки
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

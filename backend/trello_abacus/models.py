@@ -1,45 +1,29 @@
 from django.db import models
-from django.utils import timezone
+from django.conf import settings
 
 class TrelloBoard(models.Model):
     board_id = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    url = models.URLField(blank=True)
-    last_sync = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True)
+    last_sync = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    card_count = models.PositiveIntegerField(default=0)
-    list_count = models.PositiveIntegerField(default=0)
-    member_count = models.PositiveIntegerField(default=0)
-    raw_data = models.JSONField(blank=True, null=True)
-
-    class Meta:
-        verbose_name = "Доска Trello"
-        verbose_name_plural = "Доски Trello"
-        ordering = ['-last_sync']
-
+    
     def __str__(self):
-        return f"{self.name} ({self.board_id})"
+        return self.name
 
-class AbacusLog(models.Model):
-    task = models.CharField(max_length=255)
-    result = models.TextField()
+class AbacusQuery(models.Model):
+    query = models.TextField()
+    response = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
-    execution_time = models.DurationField(null=True, blank=True)
-    status = models.CharField(max_length=20, default='success', choices=[
-        ('success', 'Успешно'),
-        ('error', 'Ошибка'),
-        ('warning', 'Предупреждение')
-    ])
-
-    class Meta:
-        verbose_name = "Лог Abacus"
-        verbose_name_plural = "Логи Abacus"
-        ordering = ['-created_at']
-        indexes = [
-            models.Index(fields=['created_at']),
-            models.Index(fields=['status']),
-        ]
-
+    execution_time = models.FloatField()
+    
     def __str__(self):
-        return f"{self.task} - {self.created_at.date()}"
+        return f"Query at {self.created_at}"
+
+class MediaFile(models.Model):
+    name = models.CharField(max_length=255)
+    file = models.FileField(upload_to='media/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name

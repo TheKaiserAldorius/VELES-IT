@@ -1,0 +1,46 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/trello_admin.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Trello Boards</h3>
+            <p>{{ stats.trello_boards }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Abacus Queries</h3>
+            <p>{{ stats.abacus_queries }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Media Files</h3>
+            <p>{{ stats.media_files }}</p>
+        </div>
+    </div>
+
+    <div class="dashboard-sections">
+        <div class="dashboard-section">
+            <h3>Trello Integration</h3>
+            <a href="{% url 'myadmin:trello-sync' %}" class="button trello">Sync Now</a>
+            <a href="{% url 'myadmin:trello_abacus_trelloboard_changelist' %}" class="button settings">Manage Boards</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Abacus AI</h3>
+            <a href="{% url 'myadmin:abacus-query' %}" class="button json">New Query</a>
+            <a href="{% url 'myadmin:trello_abacus_abacusquery_changelist' %}" class="button">Query History</a>
+        </div>
+
+        <div class="dashboard-section">
+            <h3>Media Player</h3>
+            <a href="{% url 'myadmin:media-player' %}" class="button">Open Player</a>
+            <a href="{% url 'myadmin:trello_abacus_mediafile_changelist' %}" class="button">Manage Files</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
