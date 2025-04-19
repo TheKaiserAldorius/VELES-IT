@@ -6,11 +6,29 @@
 }
 
 .calculator-form h2 {
+  position: relative;
   text-align: center;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
   font-size: 28px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-form h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(53, 201, 37),
+    transparent
+  );
 }
 
 .form-group {
@@ -304,5 +322,168 @@ button[type="submit"]:disabled {
   40%,
   80% {
     transform: translateX(5px);
+  }
+}
+
+@media (max-width: 992px) {
+  .calculator-form {
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .calculator-form h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-form {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .services-list,
+  .subcategories-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .service-item,
+  .subcategory-item {
+    padding: 12px 18px;
+    font-size: 15px;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  }
+
+  .service-item:hover,
+  .subcategory-item:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+
+  .option {
+    padding: 14px;
+    border-radius: 10px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  button[type="submit"] {
+    border-radius: 25px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .result {
+    border-radius: 15px;
+    padding: 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(53, 201, 37, 0.12) 0%,
+      rgba(53, 201, 37, 0.08) 100%
+    );
+  }
+}
+
+@media (max-width: 576px) {
+  .calculator-form {
+    padding: 18px 15px;
+    border-radius: 16px;
+    margin: 10px;
+  }
+
+  .calculator-form h2 {
+    font-size: 24px;
+  }
+
+  .service-item,
+  .subcategory-item {
+    padding: 10px 16px;
+    font-size: 14px;
+    flex-grow: 1;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .options-group h3 {
+    text-align: center;
+    font-size: 17px;
+  }
+
+  .option {
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .total {
+    font-size: 28px;
+    padding: 12px 15px;
+  }
+
+  /* Анимация для мобильных */
+  @keyframes mobilePulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .total {
+    animation: mobilePulse 2s infinite ease-in-out;
+  }
+}
+
+/* Специальные стили для очень маленьких устройств */
+@media (max-width: 400px) {
+  .service-item,
+  .subcategory-item {
+    min-width: calc(50% - 10px);
+    box-sizing: border-box;
+  }
+
+  .option {
+    font-size: 13px;
+  }
+
+  .total {
+    font-size: 24px;
+  }
+}
+
+/* Адаптация для ландшафтного режима */
+@media (max-height: 500px) and (orientation: landscape) {
+  .calculator-form {
+    max-width: 90%;
+    margin: 15px auto;
+    padding: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .services-list,
+  .subcategories-list {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .service-item,
+  .subcategory-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .options-group {
+    padding: 10px;
   }
 }
