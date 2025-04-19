@@ -429,6 +429,7 @@ body {
   justify-content: center; /* Центрируем по горизонтали */
   gap: 40px; /* Расстояние между карточками */
   flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
+  list-style: none;
 }
 
 .team-card {
@@ -564,6 +565,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+  list-style: none;
 }
 
 .service-card1 {
@@ -4411,6 +4413,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
 }
 
 .requisite-item {
@@ -5044,9 +5051,11 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  list-style: none;
 }
 
 .case-card {
+  padding: 20px;
   background: var(--card-bg);
   border-radius: 10px;
   overflow: hidden;
@@ -5064,6 +5073,8 @@ body {
 
 .case-image {
   height: 200px;
+  max-width: 336px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   background-color: var(--primary-dark-40);
@@ -6402,13 +6413,6 @@ button[type="submit"]:disabled {
   margin-top: 20px;
 }
 
-.case-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  transition: transform 0.3s ease;
-}
-
 .case-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -6645,16 +6649,6 @@ button[type="submit"]:disabled {
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @keyframes slideUp {
   from {
