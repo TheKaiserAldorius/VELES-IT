@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Admin.css';
 
 export default function AdminPage() {
   const [boards, setBoards] = useState([]);

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './TrafficPage.css';
 
 const TrafficPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);

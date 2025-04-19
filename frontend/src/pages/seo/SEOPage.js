@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './SEOPage.css';
 
 const SEOPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './DesignPage.css';
 
 const DesignPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);

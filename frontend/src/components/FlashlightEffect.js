@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import './FlashlightEffect.css';
 
 const FlashlightEffect = () => {
   const spotlightRef = useRef(null);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
-import './ProfilePage.css';
 
 const ProfilePage = () => {
   // Временные данные для визуализации
