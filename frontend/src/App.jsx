@@ -187,7 +187,7 @@ const HomePage = () => {
       </div>
 
       <section className="services-section1">
-        <div className="section-container1">
+        <div className="section-container">
           <h2>Наши услуги</h2>
           <p className="section-subtitle">
             Комплексные решения для вашего бизнеса
