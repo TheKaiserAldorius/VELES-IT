@@ -20,7 +20,6 @@
   --border-secondary: rgba(255, 255, 255, 0.1);
   --shadow-primary: 0 4px 20px rgba(0, 0, 0, 0.4);
   --shadow-accent: 0 4px 20px rgba(0, 180, 216, 0.3);
-  
 }
 
 /* Базовые стили */
@@ -30,11 +29,12 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   height: 100%;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -84,14 +84,14 @@ html, body {
   pointer-events: none;
   background: radial-gradient(
     circle 250px at var(--x, -100px) var(--y, -100px),
-    transparent 0%,
-    rgba(0, 0, 0, 1) 80%
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 1) 60%
   );
-  z-index: 6;
+  z-index: 1;
 }
 
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -100,8 +100,12 @@ html, body {
   background: rgba(0, 0, 0, 0.7);
   z-index: 0;
 }
-.hero-content{
-  z-index: 2;
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  margin: 0 auto;
+  pointer-events: none;
 }
 
 .hero-content h1 {
@@ -129,7 +133,6 @@ html, body {
 .section {
   padding: 6rem 2rem;
   text-align: center;
-  
 }
 
 .section-container {
@@ -145,7 +148,7 @@ html, body {
 .section-header h2 {
   font-size: 2.5rem;
   font-weight: 600;
-  
+
   margin-bottom: 1rem;
   position: relative;
   display: inline-block;
@@ -153,7 +156,7 @@ html, body {
 }
 
 .section-header h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 80px;
   height: 4px;
@@ -211,6 +214,7 @@ html, body {
 }
 
 .hero-content {
+  position: relative;
   z-index: 3;
   max-width: 800px;
   margin: 0 auto;
@@ -282,19 +286,18 @@ html, body {
   cursor: pointer;
   color: white;
   font-weight: 600;
-  
+  pointer-events: visible;
+
   /* Плавные переходы для всех анимируемых свойств */
-  transition: 
-    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     background-color 0.3s ease;
 }
 
 .hero-calculate-btn:hover {
   transform: translateY(-5px); /* Увеличиваем подъем */
-  box-shadow: 
-    0 15px 30px rgba(52, 201, 36, 0.4), /* Более мягкая тень */
-    0 5px 15px rgba(52, 201, 36, 0.3); /* Многослойная тень */
+  box-shadow: 0 15px 30px rgba(52, 201, 36, 0.4),
+    /* Более мягкая тень */ 0 5px 15px rgba(52, 201, 36, 0.3); /* Многослойная тень */
   background-color: #2db320; /* Легкое изменение цвета */
 }
 
@@ -303,16 +306,16 @@ html, body {
 }
 
 .hero-calculate-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.25), 
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
     transparent
   );
   transform: translateX(-100%);
@@ -339,7 +342,7 @@ html, body {
 
 /* Эффекты */
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -357,17 +360,21 @@ html, body {
   height: 100%;
   pointer-events: none;
   background: radial-gradient(
-    circle 220px at var(--x, -200px) var(--y, -200px),
-    transparent 0%,
-    rgba(0, 0, 0, 0.909) 40%
+    circle 250px at var(--x, -100px) var(--y, -100px),
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 1) 60%
   );
   z-index: 1;
 }
 
 /* Анимации */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Специфичные стили компонентов */
@@ -410,7 +417,7 @@ html, body {
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto 1.5rem;
-  border: 3px solid #34c924;;
+  border: 3px solid #34c924;
 }
 
 .team-photo img {
@@ -420,7 +427,7 @@ html, body {
 }
 
 .team-position {
-  color: #16af05;;
+  color: #16af05;
   font-weight: 600;
   margin: 0.5rem 0;
 }
@@ -436,7 +443,7 @@ html, body {
     margin-left: 0;
     padding-top: var(--navbar-mobile-height);
   }
-  
+
   .team-card {
     margin-bottom: 30px;
   }
@@ -461,12 +468,12 @@ html, body {
     margin-left: 0;
     padding-top: var(--navbar-mobile-height);
   }
-  
+
   .hero-section {
     padding: 6rem 1.5rem;
     min-height: auto;
   }
-  
+
   .card-grid {
     grid-template-columns: 1fr;
   }
@@ -476,7 +483,7 @@ html, body {
   .hero-section {
     padding: 5rem 1rem;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
   }
@@ -485,17 +492,25 @@ html, body {
 /* Задержки анимаций для карточек */
 .service-card:nth-child(1),
 .case-card:nth-child(1),
-.team-card:nth-child(1) { animation-delay: 0.1s; }
+.team-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
 
 .service-card:nth-child(2),
 .case-card:nth-child(2),
-.team-card:nth-child(2) { animation-delay: 0.2s; }
+.team-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
 
 .service-card:nth-child(3),
 .case-card:nth-child(3),
-.team-card:nth-child(3) { animation-delay: 0.3s; }
+.team-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
 
-.service-card:nth-child(4) { animation-delay: 0.4s; }
+.service-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 .footer {
   text-align: center;
@@ -531,7 +546,7 @@ html, body {
 .service-card1:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-primary);
-  border-color: #34c924;;
+  border-color: #34c924;
 }
 
 .service-image img {
@@ -553,7 +568,7 @@ html, body {
 }
 
 .service-order-btn {
-  background: #34c924a3;;
+  background: #34c924a3;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -568,8 +583,8 @@ html, body {
 .service-order-btn:hover {
   background: #34c924;
 }
-.project-details-btn{
-  background: #34c9249e;;
+.project-details-btn {
+  background: #34c9249e;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -580,13 +595,12 @@ html, body {
   font-weight: 600;
   margin-top: 1rem;
 }
-.project-details-btn:hover{
+.project-details-btn:hover {
   background-color: #34c924;
 }
 
-.contact-info{
+.contact-info {
   color: white;
-  margin-left:100px;
+  margin-left: 100px;
   text-align: start;
-
 }
