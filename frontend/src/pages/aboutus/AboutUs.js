@@ -1,5 +1,4 @@
 import React from 'react';
-import './Aboutus.css';
 import { Link } from 'react-router-dom';
 
 const Aboutus = () => {

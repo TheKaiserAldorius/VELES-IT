@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './DevPage.css'; // Используем общий файл стилей
 
 const DevPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);

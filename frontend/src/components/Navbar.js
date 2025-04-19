@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { Player } from "@lottiefiles/react-lottie-player";
-import "./Navbar.css";
 
 //анимаций Lottie
 import aboutAnimation from "../animations/Home.json";

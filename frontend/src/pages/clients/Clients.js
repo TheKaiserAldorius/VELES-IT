@@ -1,7 +1,6 @@
 // pages/clients/Clients.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Clients.css';
 
 const ClientsPage = () => {
   const clients = [

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './SMMPage.css';
 
 const SMMPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);

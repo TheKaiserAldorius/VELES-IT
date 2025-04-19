@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './AIPage.css'; 
 const AIPage = () => {
   const [activeCase, setActiveCase] = useState(null);
 

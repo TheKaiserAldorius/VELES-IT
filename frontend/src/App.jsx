@@ -21,7 +21,7 @@ import CasesPage from "pages/cases/Cases";
 import ItHomesPage from "pages/ItHomes/ItHomes";
 import FlashlightEffect from "./components/FlashlightEffect";
 import AdminPage from "pages/AdminPage";
-import "./App.css";
+import "./style.css";
 
 // Карточка услуги (обновленная по ТЗ)
 const ServiceCard = ({ service }) => (

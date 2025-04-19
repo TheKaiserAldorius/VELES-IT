@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./CalculatorForm.css";
 
 const API_URL = "http://localhost:8000/api/v1";
 

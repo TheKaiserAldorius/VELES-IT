@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Blockchain.css';
 
 const Blockchain = () => {
   const [activeFaq, setActiveFaq] = useState(null);

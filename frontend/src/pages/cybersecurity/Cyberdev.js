@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Cyberdev.css';
 
 const Cyberdev = () => {
   const [activeFaq, setActiveFaq] = useState(null);

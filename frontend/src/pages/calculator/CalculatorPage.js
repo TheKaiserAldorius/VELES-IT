@@ -1,6 +1,5 @@
 import React from "react";
 import CalculatorForm from "./CalculatorForm";
-import "./CalculatorPage.css";
 
 const CalculatorPage = () => {
   return (
