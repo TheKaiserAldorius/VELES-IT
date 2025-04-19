@@ -145,6 +145,18 @@ body {
   text-align: center;
 }
 
+@media (max-width: 1024px) {
+  .section-container {
+    margin-left: 65px;
+  }
+}
+
+@media (max-width: 991px) {
+  .section-container {
+    margin-left: 0;
+  }
+}
+
 .section-header {
   margin-bottom: 4rem;
 }
@@ -215,6 +227,18 @@ body {
   justify-content: center;
   overflow: hidden;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    margin-left: 65px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-section {
+    margin-left: 0;
+  }
 }
 
 .hero-content {
@@ -405,6 +429,7 @@ body {
   justify-content: center; /* Центрируем по горизонтали */
   gap: 40px; /* Расстояние между карточками */
   flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
+  list-style: none;
 }
 
 .team-card {
@@ -521,6 +546,12 @@ body {
   padding: 2rem;
   margin-left: 80px;
 }
+
+@media (max-width: 991px) {
+  .footer {
+    margin-left: 0;
+  }
+}
 /* Стили для блока услуг */
 /* Явные стили для гарантии видимости */
 .services-section1 {
@@ -534,6 +565,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+  list-style: none;
 }
 
 .service-card1 {
@@ -543,8 +575,8 @@ body {
   transition: all 0.3s ease;
   border: 1px solid var(--border-secondary);
   text-align: center;
-  opacity: 1 !important; /* Гарантируем видимость */
-  animation: none !important; /* Отключаем анимацию для теста */
+  opacity: 1 !important;
+  animation: none !important;
 }
 
 .service-card1:hover {
@@ -562,6 +594,10 @@ body {
   background: #fff; /* Добавим фон для изображений */
   padding: 10px;
   border-radius: 50%;
+}
+
+.description-content {
+  min-height: 80px;
 }
 
 .service-price {
@@ -605,7 +641,6 @@ body {
 
 .contact-info {
   color: white;
-  margin-left: 100px;
   text-align: start;
 }
 
@@ -692,6 +727,17 @@ body {
   padding: 0 20px;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    margin-left: 70px;
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    margin-left: 0;
+  }
+}
 /* Hero Section */
 .traffic-hero {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -1159,12 +1205,6 @@ body {
   background-color: #0a0a0a;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* Hero Section */
 .smm-hero {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -1584,12 +1624,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: #0a0a0a;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* Hero Section */
@@ -2395,12 +2429,6 @@ body {
   background-color: var(--bg-secondary);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 .description-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2569,12 +2597,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: #0a0a0a;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* Hero Section */
@@ -3184,12 +3206,6 @@ body {
   background-color: #0a0a0a;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* Hero Section */
 .design-hero {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -3666,12 +3682,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: #0a0a0a;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* Hero Section */
@@ -4293,12 +4303,6 @@ body {
   border-bottom: 1px solid var(--border-primary);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
 .contacts-title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -4409,6 +4413,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
 }
 
 .requisite-item {
@@ -4471,6 +4480,18 @@ body {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border-primary);
+}
+
+@media (max-width: 1024px) {
+  .clients-hero {
+    margin-left: 65px;
+  }
+}
+
+@media (max-width: 991px) {
+  .clients-hero {
+    margin-left: 0;
+  }
 }
 
 .clients-hero::before {
@@ -4994,11 +5015,6 @@ body {
   border-bottom: 1px solid var(--border-primary);
 }
 
-.section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .cases-header {
   text-align: center;
   margin-bottom: 4rem;
@@ -5035,9 +5051,11 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  list-style: none;
 }
 
 .case-card {
+  padding: 20px;
   background: var(--card-bg);
   border-radius: 10px;
   overflow: hidden;
@@ -5055,6 +5073,8 @@ body {
 
 .case-image {
   height: 200px;
+  max-width: 336px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   background-color: var(--primary-dark-40);
@@ -5230,6 +5250,13 @@ body {
 @media (max-width: 1024px) {
   .calculator-page {
     margin-top: 50px;
+    margin-right: 75px;
+  }
+}
+
+@media (max-width: 991px) {
+  .calculator-page {
+    margin-right: auto;
   }
 }
 
@@ -5766,12 +5793,6 @@ button[type="submit"]:disabled {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: #0a0a0a;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* Hero Section */
@@ -6392,13 +6413,6 @@ button[type="submit"]:disabled {
   margin-top: 20px;
 }
 
-.case-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  transition: transform 0.3s ease;
-}
-
 .case-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -6508,6 +6522,18 @@ button[type="submit"]:disabled {
   max-width: 1200px;
   margin: 80px auto;
   padding: 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .values-section {
+    margin-left: 65px;
+  }
+}
+
+@media (max-width: 991px) {
+  .values-section {
+    margin-left: 0;
+  }
 }
 
 .values-section h2 {
@@ -6623,16 +6649,6 @@ button[type="submit"]:disabled {
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @keyframes slideUp {
   from {
@@ -6939,7 +6955,6 @@ button[type="submit"]:disabled {
 }
 
 .menu-link:hover {
-  color: white;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -6947,7 +6962,7 @@ button[type="submit"]:disabled {
   margin-top: 8px;
   font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
