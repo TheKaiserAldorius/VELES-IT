@@ -41,8 +41,8 @@ def api_welcome(request):
 def load_services_data():
     """Загрузка данных из services.json"""
     try:
-        base_dir = Path(__file__).resolve().parent
-        file_path = base_dir / "datacollcore" / "routes" / "data" / "services.json"
+        base_dir = Path(__file__).resolve().parent.parent  # Получаем backend/backend/
+        file_path = base_dir / "datacollcore" / "data" / "services.json"
 
         logger.info(f"Пытаюсь загрузить файл услуг по пути: {file_path}")
         
