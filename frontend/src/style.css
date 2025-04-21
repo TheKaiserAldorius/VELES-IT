@@ -6905,13 +6905,17 @@ button[type="submit"]:disabled {
   overflow-y: auto;
   z-index: 900;
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+
+  @media (max-width: 991px) {
+    overflow: scroll;
+  }
 }
 
 .side-menu.desktop {
   left: 0;
   bottom: 0;
   width: var(--sidebar-width);
-  overflow-x: hidden;
 }
 
 .side-menu.mobile {
@@ -6939,7 +6943,6 @@ button[type="submit"]:disabled {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .menu-link {
@@ -7142,6 +7145,63 @@ button[type="submit"]:disabled {
   background: rgba(0, 180, 216, 0.2);
 }
 
+.menu-item-wrapper {
+  position: relative;
+}
+
+.services-submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: var(--dark-color);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  min-width: 280px;
+  z-index: 1000;
+  border: 1px solid rgba(74, 107, 255, 0.1);
+  display: none;
+}
+
+.services-submenu.active {
+  display: block;
+}
+
+.submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+}
+
+.submenu-item::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.submenu-item:hover {
+  background: rgba(74, 107, 255, 0.05);
+  color: #34c924;
+}
+
+.submenu-item:hover::before {
+  /* Убран transform: scale(1.5); */
+  background: var(--accent-color);
+}
 /* Адаптивные стили */
 @media (max-width: 768px) {
   .language-selector {
@@ -7237,9 +7297,8 @@ button[type="submit"]:disabled {
 //    Footer.css
 //••••••••••••••••••••••••••••••••• */
 
-/* Base styles */
 .footer {
-  background-color: rgb(27 29 36);
+  background-color: var(--dark-color);
   color: #e2e8f0;
   padding: 3rem 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -7264,7 +7323,6 @@ button[type="submit"]:disabled {
   }
 }
 
-/* Sections */
 .footer-section {
   display: flex;
   flex-direction: column;
@@ -7292,7 +7350,6 @@ button[type="submit"]:disabled {
   max-width: 390px;
 }
 
-/* List styles */
 .footer-list {
   display: flex;
   flex-direction: column;
@@ -7322,7 +7379,6 @@ button[type="submit"]:disabled {
   transform: translateX(5px);
 }
 
-/* Divider */
 .footer-divider {
   border-top: 1px solid rgba(148, 163, 184, 0.2);
   margin: 2rem 0;
@@ -7352,7 +7408,6 @@ button[type="submit"]:disabled {
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 480px) {
   .footer {
     padding: 2rem 1rem;

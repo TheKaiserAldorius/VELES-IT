@@ -11,7 +11,6 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-grid">
-          {/* Company Info */}
           <div className="footer-section">
             <h3 className="footer-title">
               <FaBuilding className="footer-icon" /> ВЕЛЕС-АЙТИ
@@ -21,7 +20,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Contacts */}
           <div className="footer-section">
             <h3 className="footer-title">Контакты</h3>
             <ul className="footer-list">
@@ -51,10 +49,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="footer-divider"></div>
 
-        {/* Copyright */}
         <div className="footer-copyright">© 2025 velestIT - ООО ВЕЛЕС-АЙТИ</div>
       </div>
     </footer>
