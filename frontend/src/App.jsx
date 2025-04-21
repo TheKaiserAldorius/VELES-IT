@@ -25,6 +25,7 @@ import "./style.css";
 import ServiceCard from "./components/ServiceCard";
 import ProjectCard from "./components/ProjectCard";
 import TeamMemberCard from "./components/TeamMemberCard";
+import Footer from "./components/footer";
 import { services, projects, team } from "./data/homeData";
 
 // Приватный маршрут
@@ -118,33 +119,6 @@ const HomePage = () => {
           </ul>
         </div>
       </section>
-
-      {/* Существующий блок контактов */}
-      <section id="contacts" className="contact-section">
-        {" "}
-        <div className="section-container">
-          <div className="contact-container">
-            <div className="contact-info">
-              <h1>Контакты</h1>
-              <p>ИНН 9703208785</p>
-              <p>Наименование: ООО ВЕЛЕС-АЙТИ</p>
-              <p>
-                <span>📧 Email:</span>{" "}
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-              </p>
-              <p>
-                <span>📞 Телефон:</span>{" "}
-                <a href={`tel:${contactPhone}`}>{displayPhone}</a>
-              </p>
-              <p>
-                <span>🏢 Адрес:</span>123376, г. Москва, ул. Красная Пресня, д.
-                32-34, пом. 1Л/Н
-              </p>
-              <h2>Политика обработки персональных данных</h2>{" "}
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 };
@@ -174,9 +148,7 @@ function App() {
           <Route path="/AdminPage" element={<AdminPage />} />
         </Routes>
       </main>
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} VelesIT - ООО ВЕЛЕС-АЙТИ</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
