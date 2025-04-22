@@ -7,6 +7,8 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaGlobe,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { Player } from "@lottiefiles/react-lottie-player";
@@ -26,6 +28,9 @@ export default function Navbar() {
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
   const { user } = useAuth();
   const animationRefs = useRef({});
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const submenuTimeoutRef = useRef(null);
+  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
 
   const languages = [
     { code: "brics", name: "BRICS" },
@@ -42,6 +47,16 @@ export default function Navbar() {
       path: "/services",
       animation: servicesAnimation,
       id: "services",
+      subServices: [
+        { name: "Калькулятор", path: "/calculator" },
+        { name: "Лендинги", path: "/landings" },
+        { name: "Корпоративные порталы", path: "/portals" },
+        { name: "Интернет-магазины", path: "/ecommerce" },
+        { name: "Сайты-визитки", path: "/business-cards" },
+        { name: "CRM и ERP решения", path: "/crm-erp" },
+        { name: "Веб-приложения", path: "/web-apps" },
+        { name: "Техническая поддержка сайтов", path: "/support" },
+      ],
     },
     {
       name: "Клиенты",
@@ -69,16 +84,50 @@ export default function Navbar() {
     },
   ];
 
-  const handleMouseEnter = (id) => {
+  const handleScrollToFooter = (event) => {
+    const footerElement = document.getElementById("footer");
+    if (footerElement) {
+      event.preventDefault();
+      footerElement.scrollIntoView({ behavior: "smooth" });
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    } else {
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
+  const handleMouseEnterService = (id) => {
+    if (submenuTimeoutRef.current) {
+      clearTimeout(submenuTimeoutRef.current);
+    }
+    setActiveSubmenu(id);
     if (animationRefs.current[id]) {
       animationRefs.current[id].play();
     }
   };
 
-  const handleMouseLeave = (id) => {
+  const handleMouseLeaveService = (id) => {
+    submenuTimeoutRef.current = setTimeout(() => {
+      setActiveSubmenu(null);
+    }, 200);
     if (animationRefs.current[id]) {
       animationRefs.current[id].stop();
     }
+  };
+
+  const handleMouseEnterSubmenu = () => {
+    if (submenuTimeoutRef.current) {
+      clearTimeout(submenuTimeoutRef.current);
+    }
+  };
+
+  const handleMouseLeaveSubmenu = () => {
+    submenuTimeoutRef.current = setTimeout(() => {
+      setActiveSubmenu(null);
+    }, 200);
   };
 
   useEffect(() => {
@@ -94,6 +143,10 @@ export default function Navbar() {
   const handleLanguageChange = (lang) => {
     setLanguage(lang.name);
     setShowLanguageDropdown(false);
+  };
+
+  const toggleMobileSubmenu = (id) => {
+    setActiveMobileSubmenu(activeMobileSubmenu === id ? null : id);
   };
 
   return (
@@ -112,12 +165,11 @@ export default function Navbar() {
             {!isMobile && (
               <div className="desktop-contacts">
                 <div className="contact-item">
-                  <FaEnvelope className="contact-icon1" />
-                  <a href="mailto:info@velesit.pro">info@velesit.pro</a>
+                  <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
                 </div>
-                <div className="contact-item">
+                <div className="contact-item color-link">
                   <SiTelegram className="contact-icon1" />
-                  <a href="tel:+79269128783">+7 926 912 8783</a>
+                  <a href="tel:+79169892974">+7 916 989 2974</a>
                 </div>
               </div>
             )}
@@ -154,7 +206,7 @@ export default function Navbar() {
         <div className="menu-content">
           {isMobile && (
             <div className="mobile-contacts">
-              <div className="language-selector mobile">
+              {/* <div className="language-selector mobile">
                 <button
                   className="language-toggle"
                   onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
@@ -176,16 +228,15 @@ export default function Navbar() {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="contact-item">
                 <SiTelegram className="contact-icon" />
-                <a href="tel:+79269128783">+7 926 912 8783</a>
+                <a href="tel:+79169892974">+7 916 989 2974</a>
               </div>
 
               <div className="contact-item">
-                <FaEnvelope className="contact-icon" />
-                <a href="mailto:info@velesit.pro">info@velesit.pro</a>
+                <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
               </div>
 
               <div className="contact-item">
@@ -197,27 +248,139 @@ export default function Navbar() {
 
           <div className="menu-section">
             {services.map((service) => (
-              <Link
+              <div
                 key={service.id}
-                to={service.path}
-                className="menu-link"
-                onClick={() => isMobile && setIsMenuOpen(false)}
-                onMouseEnter={() => handleMouseEnter(service.id)}
-                onMouseLeave={() => handleMouseLeave(service.id)}
+                className="menu-item-wrapper"
+                onMouseEnter={() =>
+                  service.subServices &&
+                  !isMobile &&
+                  handleMouseEnterService(service.id)
+                }
+                onMouseLeave={() =>
+                  service.subServices &&
+                  !isMobile &&
+                  handleMouseLeaveService(service.id)
+                }
               >
-                <div className="lottie-icon">
-                  <Player
-                    lottieRef={(instance) => {
-                      animationRefs.current[service.id] = instance;
+                {isMobile && service.subServices ? (
+                  <div className="mobile-menu-item-with-submenu">
+                    <div className="mobile-menu-item-header">
+                      <Link
+                        to={service.path}
+                        className="menu-link"
+                        onClick={(e) => {
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        <div className="lottie-icon">
+                          <Player
+                            lottieRef={(instance) => {
+                              animationRefs.current[service.id] = instance;
+                            }}
+                            autoplay={false}
+                            loop={true}
+                            src={service.animation}
+                            style={{ width: "44px", height: "44px" }}
+                          />
+                        </div>
+                        <span className="menu-link-text">{service.name}</span>
+                      </Link>
+                      <button
+                        className="mobile-submenu-toggle"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMobileSubmenu(service.id);
+                        }}
+                        aria-expanded={activeMobileSubmenu === service.id}
+                        aria-label={
+                          activeMobileSubmenu === service.id
+                            ? "Скрыть подменю"
+                            : "Показать подменю"
+                        }
+                      >
+                        {activeMobileSubmenu === service.id ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )}
+                      </button>
+                    </div>
+                    {activeMobileSubmenu === service.id && (
+                      <div className="mobile-submenu">
+                        {service.subServices.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.path}
+                            className="mobile-submenu-item"
+                            onClick={() => {
+                              setActiveMobileSubmenu(null);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    to={service.path}
+                    className="menu-link"
+                    onClick={(e) => {
+                      if (service.id === "contact") {
+                        handleScrollToFooter(e);
+                      } else {
+                        if (isMobile) {
+                          setIsMenuOpen(false);
+                        }
+                      }
                     }}
-                    autoplay={false}
-                    loop={true}
-                    src={service.animation}
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                </div>
-                <span className="menu-link-text">{service.name}</span>
-              </Link>
+                    onMouseEnter={() =>
+                      (!service.subServices || !isMobile) &&
+                      handleMouseEnterService(service.id)
+                    }
+                    onMouseLeave={() =>
+                      (!service.subServices || !isMobile) &&
+                      handleMouseLeaveService(service.id)
+                    }
+                  >
+                    <div className="lottie-icon">
+                      <Player
+                        lottieRef={(instance) => {
+                          animationRefs.current[service.id] = instance;
+                        }}
+                        autoplay={false}
+                        loop={true}
+                        src={service.animation}
+                        style={{ width: "44px", height: "44px" }}
+                      />
+                    </div>
+                    <span className="menu-link-text">{service.name}</span>
+                  </Link>
+                )}
+
+                {service.subServices && !isMobile && (
+                  <div
+                    className={`submenu services-submenu ${
+                      activeSubmenu === service.id ? "active" : ""
+                    }`}
+                    onMouseEnter={handleMouseEnterSubmenu}
+                    onMouseLeave={handleMouseLeaveSubmenu}
+                  >
+                    {service.subServices.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.path}
+                        className="submenu-item"
+                        onClick={() => setActiveSubmenu(null)}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
