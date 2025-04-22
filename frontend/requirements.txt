@@ -3,3 +3,4 @@ axios
 @lottiefiles/react-lottie-player
 react-slick
 slick-carousel
+papaparse 

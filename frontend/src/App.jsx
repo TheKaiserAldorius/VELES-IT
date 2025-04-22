@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router ,Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import AIPage from "./pages/ai/AIPage";
@@ -28,6 +28,8 @@ import TeamMemberCard from "./components/TeamMemberCard";
 import Footer from "./components/footer";
 import { services, projects, team } from "./data/homeData";
 import ScrollToTop from "./components/ScrollToTop";
+import ServiceTemplate from "./pages/template/ServiceTemplate";
+
 
 // Приватный маршрут
 const PrivateRoute = ({ children }) => {
@@ -146,6 +148,7 @@ function App() {
           <Route path="/ItHomes" element={<ItHomesPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/AdminPage" element={<AdminPage />} />
+          <Route path="/:serviceSlug" element={<ServiceTemplate />} />
         </Routes>
       </main>
       <Footer />
