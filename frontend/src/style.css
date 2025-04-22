@@ -6941,7 +6941,7 @@ button[type="submit"]:disabled {
 }
 
 .menu-content {
-  padding: 1rem 1rem;
+  padding: 1rem 0;
   color: #f8f8f8;
   display: flex;
   flex-direction: column;
@@ -6960,6 +6960,7 @@ button[type="submit"]:disabled {
   flex-direction: column;
   align-items: center;
   padding: 12px 0;
+  max-width: 265px;
   width: 100%;
   color: #d1d1d1;
   text-decoration: none;
@@ -7000,6 +7001,7 @@ button[type="submit"]:disabled {
   display: none;
   margin-bottom: 2rem;
   width: 100%;
+  padding: 0 1rem;
 }
 
 .mobile-contacts .contact-item {
@@ -7087,10 +7089,6 @@ button[type="submit"]:disabled {
 
   .side-menu.mobile {
     width: 90%;
-  }
-
-  .menu-content {
-    padding: 1rem;
   }
 }
 .language-selector {
@@ -7186,6 +7184,7 @@ button[type="submit"]:disabled {
   font-weight: 500;
   font-size: 1rem;
   position: relative;
+  text-align: left;
 }
 
 .submenu-item::before {
@@ -7456,5 +7455,68 @@ button[type="submit"]:disabled {
 
   .footer-list-icon {
     margin-top: 0;
+  }
+}
+
+@media (max-width: 991px) {
+  .mobile-menu-item-with-submenu {
+    width: 100%;
+  }
+
+  .mobile-menu-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .mobile-menu-item-header .menu-link {
+    flex-grow: 1;
+    padding-right: 0;
+  }
+
+  .mobile-submenu-toggle {
+    background: none;
+    border: none;
+    color: #d1d1d1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 12px 15px;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-submenu-toggle:hover {
+    color: #ffffff;
+  }
+
+  .mobile-submenu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 56px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-left: 2px solid var(--accent-color);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .mobile-submenu-item {
+    display: block;
+    padding: 10px 15px 10px 0;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    border-radius: 4px;
+    text-align: left;
+  }
+
+  .mobile-submenu-item:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .side-menu.mobile .services-submenu {
+    display: none;
   }
 }

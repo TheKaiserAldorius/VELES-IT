@@ -7,6 +7,8 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaGlobe,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { Player } from "@lottiefiles/react-lottie-player";
@@ -28,6 +30,7 @@ export default function Navbar() {
   const animationRefs = useRef({});
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const submenuTimeoutRef = useRef(null);
+  const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
 
   const languages = [
     { code: "brics", name: "BRICS" },
@@ -140,6 +143,10 @@ export default function Navbar() {
   const handleLanguageChange = (lang) => {
     setLanguage(lang.name);
     setShowLanguageDropdown(false);
+  };
+
+  const toggleMobileSubmenu = (id) => {
+    setActiveMobileSubmenu(activeMobileSubmenu === id ? null : id);
   };
 
   return (
@@ -255,38 +262,103 @@ export default function Navbar() {
                   handleMouseLeaveService(service.id)
                 }
               >
-                <Link
-                  to={service.path}
-                  className="menu-link"
-                  onClick={(e) => {
-                    if (service.id === "contact") {
-                      handleScrollToFooter(e);
-                    } else {
-                      if (isMobile) {
-                        setIsMenuOpen(false);
-                      }
-                    }
-                  }}
-                  onMouseEnter={() =>
-                    !service.subServices && handleMouseEnterService(service.id)
-                  }
-                  onMouseLeave={() =>
-                    !service.subServices && handleMouseLeaveService(service.id)
-                  }
-                >
-                  <div className="lottie-icon">
-                    <Player
-                      lottieRef={(instance) => {
-                        animationRefs.current[service.id] = instance;
-                      }}
-                      autoplay={false}
-                      loop={true}
-                      src={service.animation}
-                      style={{ width: "44px", height: "44px" }}
-                    />
+                {isMobile && service.subServices ? (
+                  <div className="mobile-menu-item-with-submenu">
+                    <div className="mobile-menu-item-header">
+                      <Link
+                        to={service.path}
+                        className="menu-link"
+                        onClick={(e) => {
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        <div className="lottie-icon">
+                          <Player
+                            lottieRef={(instance) => {
+                              animationRefs.current[service.id] = instance;
+                            }}
+                            autoplay={false}
+                            loop={true}
+                            src={service.animation}
+                            style={{ width: "44px", height: "44px" }}
+                          />
+                        </div>
+                        <span className="menu-link-text">{service.name}</span>
+                      </Link>
+                      <button
+                        className="mobile-submenu-toggle"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMobileSubmenu(service.id);
+                        }}
+                        aria-expanded={activeMobileSubmenu === service.id}
+                        aria-label={
+                          activeMobileSubmenu === service.id
+                            ? "Скрыть подменю"
+                            : "Показать подменю"
+                        }
+                      >
+                        {activeMobileSubmenu === service.id ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )}
+                      </button>
+                    </div>
+                    {activeMobileSubmenu === service.id && (
+                      <div className="mobile-submenu">
+                        {service.subServices.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.path}
+                            className="mobile-submenu-item"
+                            onClick={() => {
+                              setActiveMobileSubmenu(null);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <span className="menu-link-text">{service.name}</span>
-                </Link>
+                ) : (
+                  <Link
+                    to={service.path}
+                    className="menu-link"
+                    onClick={(e) => {
+                      if (service.id === "contact") {
+                        handleScrollToFooter(e);
+                      } else {
+                        if (isMobile) {
+                          setIsMenuOpen(false);
+                        }
+                      }
+                    }}
+                    onMouseEnter={() =>
+                      (!service.subServices || !isMobile) &&
+                      handleMouseEnterService(service.id)
+                    }
+                    onMouseLeave={() =>
+                      (!service.subServices || !isMobile) &&
+                      handleMouseLeaveService(service.id)
+                    }
+                  >
+                    <div className="lottie-icon">
+                      <Player
+                        lottieRef={(instance) => {
+                          animationRefs.current[service.id] = instance;
+                        }}
+                        autoplay={false}
+                        loop={true}
+                        src={service.animation}
+                        style={{ width: "44px", height: "44px" }}
+                      />
+                    </div>
+                    <span className="menu-link-text">{service.name}</span>
+                  </Link>
+                )}
 
                 {service.subServices && !isMobile && (
                   <div
