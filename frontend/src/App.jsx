@@ -101,7 +101,7 @@ const HomePage = () => {
       </section>
 
       {/* Новый блок команды */}
-      <section className="team-section">
+      {/* <section className="team-section">
         <div className="section-container">
           <h2>Наша команда</h2>
           <p className="section-subtitle">
@@ -109,17 +109,15 @@ const HomePage = () => {
           </p>
           <ul className="team-grid">
             {" "}
-            {/* Changed div to ul */}
             {team.map((member, index) => (
               <li key={index}>
                 {" "}
-                {/* Wrapped card in li */}
                 <TeamMemberCard member={member} />
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

@@ -158,12 +158,11 @@ export default function Navbar() {
             {!isMobile && (
               <div className="desktop-contacts">
                 <div className="contact-item">
-                  <FaEnvelope className="contact-icon1" />
-                  <a href="mailto:info@velesit.pro">info@velesit.pro</a>
+                  <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
                 </div>
-                <div className="contact-item">
+                <div className="contact-item color-link">
                   <SiTelegram className="contact-icon1" />
-                  <a href="tel:+79269128783">+7 926 912 8783</a>
+                  <a href="tel:+79169892974">+7 916 989 2974</a>
                 </div>
               </div>
             )}
@@ -226,12 +225,12 @@ export default function Navbar() {
 
               <div className="contact-item">
                 <SiTelegram className="contact-icon" />
-                <a href="tel:+79269128783">+7 926 912 8783</a>
+                <a href="tel:+79169892974">+7 916 989 2974</a>
               </div>
 
               <div className="contact-item">
                 <FaEnvelope className="contact-icon" />
-                <a href="mailto:info@velesit.pro">info@velesit.pro</a>
+                <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
               </div>
 
               <div className="contact-item">
