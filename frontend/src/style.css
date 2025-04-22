@@ -7398,6 +7398,34 @@ button[type="submit"]:disabled {
   animation: float 3s ease-in-out infinite;
 }
 
+.footer-telegram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(52, 201, 36, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.footer-telegram-icon {
+  font-size: 1.5rem;
+  color: #34c924;
+  transition: all 0.3s ease;
+}
+
+.footer-telegram-link:hover {
+  background-color: rgba(52, 201, 36, 0.2);
+  transform: translateY(-3px);
+}
+
+.footer-telegram-link:hover .footer-telegram-icon {
+  color: #2aa81e;
+  transform: scale(1.1);
+}
+
 @keyframes float {
   0%,
   100% {

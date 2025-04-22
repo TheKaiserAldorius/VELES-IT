@@ -81,6 +81,21 @@ export default function Navbar() {
     },
   ];
 
+  const handleScrollToFooter = (event) => {
+    const footerElement = document.getElementById("footer");
+    if (footerElement) {
+      event.preventDefault();
+      footerElement.scrollIntoView({ behavior: "smooth" });
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    } else {
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
   const handleMouseEnterService = (id) => {
     if (submenuTimeoutRef.current) {
       clearTimeout(submenuTimeoutRef.current);
@@ -245,7 +260,15 @@ export default function Navbar() {
                 <Link
                   to={service.path}
                   className="menu-link"
-                  onClick={() => isMobile && setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    if (service.id === "contact") {
+                      handleScrollToFooter(e);
+                    } else {
+                      if (isMobile) {
+                        setIsMenuOpen(false);
+                      }
+                    }
+                  }}
                   onMouseEnter={() =>
                     !service.subServices && handleMouseEnterService(service.id)
                   }

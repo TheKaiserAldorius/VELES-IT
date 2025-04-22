@@ -5,10 +5,11 @@ import {
   FaBuilding,
   FaIdCard,
 } from "react-icons/fa";
+import { FaTelegram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <div className="footer-container">
         <div className="footer-grid">
           <div className="footer-section">
@@ -18,6 +19,15 @@ const Footer = () => {
             <p className="footer-description">
               Разработка цифровых решений для вашего бизнеса
             </p>
+            <a
+              href="https://t.me/veles_it"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-telegram-link"
+              aria-label="Наш Telegram"
+            >
+              <FaTelegram className="footer-telegram-icon" />
+            </a>
           </div>
 
           <div className="footer-section">

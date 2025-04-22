@@ -27,6 +27,7 @@ import ProjectCard from "./components/ProjectCard";
 import TeamMemberCard from "./components/TeamMemberCard";
 import Footer from "./components/footer";
 import { services, projects, team } from "./data/homeData";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Приватный маршрут
 const PrivateRoute = ({ children }) => {
@@ -127,6 +128,7 @@ function App() {
   return (
     <div className="app">
       <Navbar />
+      <ScrollToTop />
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
