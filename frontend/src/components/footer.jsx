@@ -46,7 +46,7 @@ const Footer = () => {
               <li className="footer-list-item">
                 <FaPhone className="footer-list-icon" />
                 <a href="tel:+79169892974" className="footer-link">
-                  +79169892974
+                  +7 916 989 2974
                 </a>
               </li>
               <li className="footer-list-item">

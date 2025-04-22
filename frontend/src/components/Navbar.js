@@ -199,7 +199,7 @@ export default function Navbar() {
         <div className="menu-content">
           {isMobile && (
             <div className="mobile-contacts">
-              <div className="language-selector mobile">
+              {/* <div className="language-selector mobile">
                 <button
                   className="language-toggle"
                   onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
@@ -221,7 +221,7 @@ export default function Navbar() {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="contact-item">
                 <SiTelegram className="contact-icon" />
@@ -229,7 +229,6 @@ export default function Navbar() {
               </div>
 
               <div className="contact-item">
-                <FaEnvelope className="contact-icon" />
                 <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
               </div>
 
