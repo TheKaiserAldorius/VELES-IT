@@ -1,0 +1,5 @@
+# Frontend dependencies (React) + наши lib для установки через npm install:
+axios
+@lottiefiles/react-lottie-player
+react-slick
+slick-carousel
