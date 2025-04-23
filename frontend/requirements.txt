@@ -4,3 +4,4 @@ axios
 react-slick
 slick-carousel
 papaparse 
+lucide-react

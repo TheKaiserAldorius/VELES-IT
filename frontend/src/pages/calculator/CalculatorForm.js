@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/v1";
+const API_URL = "http://localhost:3000/public/data"; //ЗАМЕНИТЬ ЗАПРОС НА VPS!
 
 const CalculatorForm = () => {
   const [services, setServices] = useState([]);
@@ -18,7 +18,7 @@ const CalculatorForm = () => {
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const { data } = await axios.get(`${API_URL}/services`);
+        const { data } = await axios.get(`${API_URL}/alltakes`);
         setServices(data);
       } catch (err) {
         setError("Ошибка загрузки услуг");

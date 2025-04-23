@@ -28,7 +28,8 @@ import TeamMemberCard from "./components/TeamMemberCard";
 import Footer from "./components/footer";
 import { services, projects, team } from "./data/homeData";
 import ScrollToTop from "./components/ScrollToTop";
-import ServiceTemplate from "./pages/template/ServiceTemplate";
+import ServicePage from "./pages/services/ServicePage";
+
 
 
 // Приватный маршрут
@@ -148,7 +149,9 @@ function App() {
           <Route path="/ItHomes" element={<ItHomesPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/:serviceSlug" element={<ServiceTemplate />} />
+          <Route path="/services/:slug" element={<ServicePage />} />
+      
+
         </Routes>
       </main>
       <Footer />
