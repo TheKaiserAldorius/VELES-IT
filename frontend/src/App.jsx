@@ -1,5 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router ,Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import AIPage from "./pages/ai/AIPage";
@@ -29,8 +36,8 @@ import Footer from "./components/footer";
 import { services, projects, team } from "./data/homeData";
 import ScrollToTop from "./components/ScrollToTop";
 import ServicePage from "./pages/services/ServicePage";
-
-
+import ServicesListPage from "./pages/services/ServicesListPage";
+import SEO from "./components/SEO/SEO.jsx";
 
 // Приватный маршрут
 const PrivateRoute = ({ children }) => {
@@ -54,6 +61,11 @@ const HomePage = () => {
 
   return (
     <>
+      <SEO
+        title="Veles IT | IT-разработка и маркетинг"
+        description="Veles IT - Инновационные IT-решения для вашего бизнеса. Веб-разработка, мобильные приложения, AI, блокчейн, маркетинг, SEO, SMM."
+        keywords="Veles IT, IT разработка, маркетинг, веб-разработка, AI, блокчейн, SEO, SMM, мобильные приложения"
+      />
       {/* Wrapped hero content in <header> for semantics */}
       <header className="hero-section">
         <FlashlightEffect />
@@ -149,9 +161,8 @@ function App() {
           <Route path="/ItHomes" element={<ItHomesPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/AdminPage" element={<AdminPage />} />
+          <Route path="/services" element={<ServicesListPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
-      
-
         </Routes>
       </main>
       <Footer />
