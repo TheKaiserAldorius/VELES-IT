@@ -1,9 +1,20 @@
-import React from 'react';
-import { FaTelegram, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import React from "react";
+import {
+  FaTelegram,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
+import SEO from "../../components/SEO/SEO";
 
 const ContactsPage = () => {
   return (
     <div className="contacts-page">
+      <SEO
+        title="Контакты | Veles IT"
+        description="Свяжитесь с Veles IT: телефон +7 916 989 29 74, email Info@veles-it.pro, Telegram @veles_it. Реквизиты ООО ВЕЛЕС-АЙТИ, адрес в Москве."
+        keywords="Veles IT, контакты, телефон, email, адрес, telegram, реквизиты, связаться с нами"
+      />
       {/* Hero Section */}
       <section className="contacts-hero">
         <div className="container">
@@ -26,12 +37,16 @@ const ContactsPage = () => {
                   </div>
                   <div>
                     <h3>Telegram</h3>
-                    <a href="https://t.me/veles_it" target="_blank" rel="noopener noreferrer">
+                    <a
+                      href="https://t.me/veles_it"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       @veles_it
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="contact-method">
                   <div className="contact-icon phone">
                     <FaPhone size={20} />
@@ -41,7 +56,7 @@ const ContactsPage = () => {
                     <a href="tel:+79169892974">+7 916 989 29 74</a>
                   </div>
                 </div>
-                
+
                 <div className="contact-method">
                   <div className="contact-icon email">
                     <FaEnvelope size={20} />
@@ -59,16 +74,20 @@ const ContactsPage = () => {
               <h2 className="section-title">Реквизиты</h2>
               <div className="contact-info">
                 <div className="requisite-item">
-                  <p><strong>ООО "ВЕЛЕС-АЙТИ"</strong></p>
+                  <p>
+                    <strong>ООО "ВЕЛЕС-АЙТИ"</strong>
+                  </p>
                   <p>ИНН 9703208785</p>
                 </div>
-                
+
                 <div className="address-item">
                   <div className="contact-icon">
                     <FaMapMarkerAlt size={20} />
                   </div>
                   <div>
-                    <p><strong>Адрес:</strong></p>
+                    <p>
+                      <strong>Адрес:</strong>
+                    </p>
                     <p>г. Москва</p>
                     <p>ул. Красная Пресня, д. 32-34</p>
                   </div>

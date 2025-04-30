@@ -13,7 +13,6 @@ import {
 import { useAuth } from "../context/AuthContext";
 import { Player } from "@lottiefiles/react-lottie-player";
 
-//анимаций Lottie
 import aboutAnimation from "../animations/Home.json";
 import servicesAnimation from "../animations/Services.json";
 import clientsAnimation from "../animations/Project.json";
@@ -41,7 +40,12 @@ export default function Navbar() {
   ];
 
   const services = [
-    { name: "О нас", path: "/aboutus", animation: aboutAnimation, id: "about" },
+    {
+      name: "О нас",
+      path: "/#AboutUs",
+      animation: aboutAnimation,
+      id: "about",
+    },
     {
       name: "Услуги",
       path: "/services",
@@ -89,6 +93,22 @@ export default function Navbar() {
     if (footerElement) {
       event.preventDefault();
       footerElement.scrollIntoView({ behavior: "smooth" });
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    } else {
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
+  const handleScrollToAnchor = (event, anchorId) => {
+    const cleanAnchorId = anchorId.replace("#", "");
+    const targetElement = document.getElementById(cleanAnchorId);
+    if (targetElement) {
+      event.preventDefault();
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
       if (isMobile) {
         setIsMenuOpen(false);
       }
@@ -167,9 +187,21 @@ export default function Navbar() {
                 <div className="contact-item">
                   <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
                 </div>
-                <div className="contact-item color-link">
-                  <SiTelegram className="contact-icon1" />
-                  <a href="tel:+79169892974">+7 916 989 2974</a>
+                <div className="contact-item">
+                  <a
+                    href="https://t.me/veles_it"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Telegram Veles IT"
+                    className="color-link"
+                  >
+                    <SiTelegram className="contact-icon1" />
+                  </a>
+                </div>
+                <div className="contact-item">
+                  <a href="tel:+79169892974" className="color-link">
+                    +7 916 989 2974
+                  </a>
                 </div>
               </div>
             )}
@@ -230,13 +262,32 @@ export default function Navbar() {
                 )}
               </div> */}
 
+              {/* Отдельный элемент для ссылки на Telegram */}
               <div className="contact-item">
-                <SiTelegram className="contact-icon" />
-                <a href="tel:+79169892974">+7 916 989 2974</a>
+                <a
+                  href="https://t.me/veles_it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Telegram Veles IT"
+                >
+                  <SiTelegram className="contact-icon" />
+                  {/* Можно добавить текст, если нужно, например 'Наш Telegram' */}
+                </a>
+              </div>
+
+              {/* Отдельный элемент для ссылки на телефон */}
+              <div className="contact-item">
+                <a href="tel:+79169892974">
+                  {/* Можно добавить иконку телефона, если есть */}
+                  +7 916 989 2974
+                </a>
               </div>
 
               <div className="contact-item">
-                <a href="mailto:start@veles-it.pro">start@veles-it.pro</a>
+                <a href="mailto:start@veles-it.pro">
+                  {/* Можно добавить иконку почты */}
+                  start@veles-it.pro
+                </a>
               </div>
 
               <div className="contact-item">
@@ -328,7 +379,9 @@ export default function Navbar() {
                     to={service.path}
                     className="menu-link"
                     onClick={(e) => {
-                      if (service.id === "contact") {
+                      if (service.path.startsWith("/#")) {
+                        handleScrollToAnchor(e, service.path.substring(1));
+                      } else if (service.id === "contact") {
                         handleScrollToFooter(e);
                       } else {
                         if (isMobile) {
