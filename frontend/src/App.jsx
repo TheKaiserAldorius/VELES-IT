@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,6 +6,7 @@ import {
   Link,
   Navigate,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
@@ -37,6 +38,9 @@ import { services, projects, team } from "./data/homeData";
 import ScrollToTop from "./components/ScrollToTop";
 import ServicePage from "./pages/services/ServicePage";
 import ServicesListPage from "./pages/services/ServicesListPage";
+import AboutSection from "components/Aboutsection";
+import WebAcademy from "./pages/WebAcademy/WebAcademy";
+import CasesSection from "components/CaseSection/CasesSection";
 import SEO from "./components/SEO/SEO.jsx";
 
 // Приватный маршрут
@@ -49,15 +53,26 @@ const PrivateRoute = ({ children }) => {
 const HomePage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleCalculateClick = () => {
     navigate("/calculator");
   };
 
-  // Email and Phone for contact links
-  const contactEmail = "info@velesit.pro";
-  const contactPhone = "+79269128783"; // Raw number for tel link
-  const displayPhone = "+7 926 912 8783"; // Formatted number for display
+  const contactEmail = "start@veles-it.pro";
+  const contactPhone = "+79169892974";
+  const displayPhone = "+7 916 989 2974";
+
+  useEffect(() => {
+    if (location.hash === "#AboutUs") {
+      const targetElement = document.getElementById("AboutUs");
+      if (targetElement) {
+        setTimeout(() => {
+          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
 
   return (
     <>
@@ -78,9 +93,12 @@ const HomePage = () => {
         </div>
       </header>
 
+      <AboutSection />
+      <CasesSection />
+
       {/* Changed div to ul/li for services list */}
       {/* Ensure CSS resets list styles (bullets, padding) if needed */}
-      <section className="services-section1">
+      {/* <section className="services-section1">
         <div className="section-container">
           <h2>Наши услуги</h2>
           <p className="section-subtitle">
@@ -88,20 +106,18 @@ const HomePage = () => {
           </p>
           <ul className="services-grid1">
             {" "}
-            {/* Changed div to ul */}
             {services.map((service, index) => (
               <li key={index}>
                 {" "}
-                {/* Wrapped card in li */}
                 <ServiceCard service={service} />
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </section> */}
 
       {/* Блок проектов (бывшие кейсы) */}
-      <section className="cases-section">
+      {/* <section className="cases-section">
         <div className="section-container">
           <h2>Наши проекты</h2>
           <p className="section-subtitle">
@@ -113,7 +129,7 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Новый блок команды */}
       {/* <section className="team-section">
@@ -145,6 +161,7 @@ function App() {
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/academy" element={<WebAcademy />} />
           <Route path="/seo" element={<SEOPage />} />
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/ai" element={<AIPage />} />

@@ -1,9 +1,16 @@
-// pages/ItHomes.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  FaWifi,
+  FaUsers,
+  FaTree,
+  FaLightbulb,
+  FaLaptop,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import SEO from "../../components/SEO/SEO";
 
 const ItHomesPage = () => {
@@ -25,20 +32,48 @@ const ItHomesPage = () => {
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf",
-      title: "IT Деревня",
-      subtitle: "Инновационное пространство для технологических стартапов",
+      title: "IT деревня",
+      subtitle: "Пространство для инноваций и творчества",
     },
     {
       id: 2,
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
-      title: "Коворкинг зоны",
-      subtitle: "Современные рабочие пространства",
+      title: "Рабочие зоны",
+      subtitle: "Комфорт и технологии в гармонии с природой",
     },
     {
       id: 3,
       image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2",
-      title: "Лаборатории",
-      subtitle: "Оснащенные всем необходимым для разработки",
+      title: "Сообщество",
+      subtitle: "Единомышленники, создающие будущее",
+    },
+  ];
+
+  const features = [
+    {
+      icon: <FaLaptop />,
+      text: "Комфортабельные рабочие зоны с высокоскоростным интернетом",
+    },
+    {
+      icon: <FaUsers />,
+      text: "Зоны для проведения встреч, семинаров и хакатонов",
+    },
+    { icon: <FaTree />, text: "Пространства для отдыха и общения" },
+    { icon: <FaMapMarkerAlt />, text: "Природные ландшафты для вдохновения" },
+  ];
+
+  const forWhom = [
+    {
+      title: "Стартапы",
+      description: "Которые ищут место для работы и развития",
+    },
+    {
+      title: "Фрилансеры",
+      description: "Которым важно комфортное рабочее пространство",
+    },
+    {
+      title: "Компании",
+      description: "Которые хотят провести корпоративные мероприятия",
     },
   ];
 
@@ -46,9 +81,10 @@ const ItHomesPage = () => {
     <div className="it-homes-page">
       <SEO
         title="IT Деревня | Veles IT"
-        description="IT Деревня от Veles IT - инновационное пространство для IT-стартапов и специалистов. Коворкинг, лаборатории, нетворкинг. Станьте резидентом."
-        keywords="Veles IT, IT Деревня, технологический кластер, стартапы, коворкинг, лаборатории, IT-пространство, инновации"
+        description="IT Деревня от Veles IT - пространство для инноваций и творчества. Кампус для стартапов, фрилансеров и компаний в гармонии с природой."
+        keywords="IT деревня, коворкинг, стартапы, фриланс, технологическое пространство, Veles IT"
       />
+
       {/* Hero Slider */}
       <section className="it-homes-slider">
         <Slider {...sliderSettings}>
@@ -73,39 +109,58 @@ const ItHomesPage = () => {
       {/* Project Description */}
       <section className="project-description">
         <div className="container">
-          <div className="description-grid">
-            <div className="description-content">
-              <h2>О проекте IT Деревня</h2>
+          <div className="description-content">
+            <h2>IT деревня — пространство для инноваций и творчества</h2>
+            <p className="intro-text">
+              IT деревня — это уникальный проект компании Veles IT, который
+              объединяет профессионалов, стартапы и энтузиастов в одном месте.
+              Мы создали пространство, где технологии встречаются с природой, а
+              идеи превращаются в реальные проекты.
+            </p>
+
+            <div className="what-is-it">
+              <h3>Что такое IT деревня?</h3>
               <p>
-                IT Деревня - это уникальный технологический кластер, созданный
-                для поддержки стартапов и IT-специалистов. На территории
-                расположены коворкинг зоны, лаборатории, переговорные комнаты и
-                зоны отдыха.
+                Это современный кампус, расположенный вдали от городской суеты,
+                где каждый может найти вдохновение и сосредоточиться на своих
+                задачах. Здесь есть все необходимое для работы, обучения и
+                отдыха:
               </p>
-              <p>
-                Проект направлен на создание экосистемы, где разработчики,
-                предприниматели и инвесторы могут работать вместе над
-                инновационными проектами.
-              </p>
-              <div className="features-list">
-                <h3>Основные возможности:</h3>
-                <ul>
-                  <li>Современные рабочие пространства</li>
-                  <li>Доступ к высокоскоростному интернету</li>
-                  <li>Лаборатории с оборудованием для разработки</li>
-                  <li>Мероприятия и воркшопы</li>
-                  <li>Возможность нетворкинга</li>
-                </ul>
+
+              <div className="features-grid">
+                {features.map((feature, index) => (
+                  <div key={index} className="feature-item">
+                    <div className="feature-icon">{feature.icon}</div>
+                    <p>{feature.text}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="description-image">
-              <div className="image-wrapper">
-                <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978"
-                  alt="IT Деревня"
-                />
+            <div className="for-whom">
+              <h3>Для кого это?</h3>
+              <div className="audience-grid">
+                {forWhom.map((item, index) => (
+                  <div key={index} className="audience-card">
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
               </div>
+            </div>
+
+            <div className="why-important">
+              <h3>Почему это важно?</h3>
+              <p>
+                Мы верим, что инновации рождаются там, где есть свобода
+                творчества и поддержка единомышленников. IT деревня — это не
+                просто место, это сообщество людей, которые меняют мир с помощью
+                технологий.
+              </p>
+              <p className="cta-text">
+                Присоединяйтесь к нашему проекту и станьте частью IT деревни —
+                пространства, где будущее создается уже сегодня!
+              </p>
             </div>
           </div>
         </div>
@@ -114,7 +169,7 @@ const ItHomesPage = () => {
       {/* Gallery Section */}
       <section className="gallery-section">
         <div className="container">
-          <h2>Галерея</h2>
+          <h2>Наша атмосфера</h2>
           <div className="gallery-grid">
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <div key={item} className="gallery-item">
@@ -131,8 +186,8 @@ const ItHomesPage = () => {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <h2>Хотите стать резидентом?</h2>
-          <p>Оставьте заявку и мы свяжемся с вами для обсуждения условий</p>
+          <h2>Хотите стать резидентом IT деревни?</h2>
+          <p>Оставьте заявку и мы расскажем подробности</p>
           <Link to="/contacts" className="cta-button">
             Оставить заявку
           </Link>

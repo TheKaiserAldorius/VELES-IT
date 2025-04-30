@@ -1,7 +1,47 @@
-// pages/cases/Cases.js
 import React from "react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO/SEO";
+import * as FaIcons from "react-icons/fa";
+
+const CASE_ICONS = {
+  "веб-разработка": FaIcons.FaCode,
+  дизайн: FaIcons.FaPalette,
+  "ux/ui": FaIcons.FaObjectGroup,
+  "мобильная разработка": FaIcons.FaMobileAlt,
+  безопасность: FaIcons.FaShieldAlt,
+  cloud: FaIcons.FaCloud,
+  "искусственный интеллект": FaIcons.FaRobot,
+  ai: FaIcons.FaRobot,
+  логистика: FaIcons.FaTruckLoading,
+  "e-commerce": FaIcons.FaShoppingCart,
+  масштабируемость: FaIcons.FaExpandAlt,
+  "big data": FaIcons.FaDatabase,
+  аналитика: FaIcons.FaChartLine,
+};
+
+const DEFAULT_CASE_ICON = FaIcons.FaBriefcase;
+
+const getCaseIcon = (tags) => {
+  const lowerTags = tags.map((tag) => tag.toLowerCase());
+  for (const tag of lowerTags) {
+    if (CASE_ICONS[tag]) {
+      const IconComponent = CASE_ICONS[tag];
+      return <IconComponent className="case-icon" />;
+    }
+  }
+
+  for (const tag of lowerTags) {
+    const foundEntry = Object.entries(CASE_ICONS).find(([key]) =>
+      tag.includes(key)
+    );
+    if (foundEntry) {
+      const IconComponent = foundEntry[1];
+      return <IconComponent className="case-icon" />;
+    }
+  }
+
+  return <DEFAULT_CASE_ICON className="case-icon" />;
+};
 
 const CasesPage = () => {
   const cases = [
@@ -60,6 +100,7 @@ const CasesPage = () => {
         description="Примеры реализованных проектов Veles IT: разработка сайтов, мобильных приложений, AI-решений, облачных хранилищ. Ознакомьтесь с нашими кейсами."
         keywords="Veles IT, кейсы, портфолио, проекты, веб-разработка, мобильная разработка, ai, cloud, e-commerce, big data"
       />
+
       <section className="cases-hero">
         <div className="hero-content">
           <h1>Наши кейсы</h1>
@@ -80,10 +121,9 @@ const CasesPage = () => {
           <div className="cases-grid">
             {cases.map((caseItem, index) => (
               <div key={index} className="case-card">
-                <div
-                  className="case-image"
-                  style={{ backgroundImage: `url(${caseItem.image})` }}
-                ></div>
+                <div className="case-icon-container">
+                  {getCaseIcon(caseItem.tags)}
+                </div>
                 <div className="case-content">
                   <h3>{caseItem.title}</h3>
                   <p>{caseItem.description}</p>

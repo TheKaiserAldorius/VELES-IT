@@ -2,26 +2,42 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Papa from "papaparse";
 import { Loader2 } from "lucide-react";
+import * as FaIcons from "react-icons/fa";
 import SEO from "../../components/SEO/SEO";
-import ServiceCard from "../../components/ServiceCard";
-import "../../style.css";
+import CalculatorBtn from "../../components/CalculatorBtn/CalculatorBtn";
+// Маппинг иконок для сервисов
+const SERVICE_ICONS = {
+  разработка: FaIcons.FaCode,
+  ai: FaIcons.FaRobot,
+  искусственный: FaIcons.FaRobot,
+  блокчейн: FaIcons.FaLink,
+  безопасность: FaIcons.FaShieldAlt,
+  кибер: FaIcons.FaShieldAlt,
+  мобильный: FaIcons.FaMobileAlt,
+  аналитика: FaIcons.FaChartLine,
+  ecommerce: FaIcons.FaShoppingCart,
+  маркетплейс: FaIcons.FaShoppingCart,
+  дизайн: FaIcons.FaPalette,
+  seo: FaIcons.FaSearchDollar,
+  smm: FaIcons.FaHashtag,
+  социальный: FaIcons.FaHashtag,
+};
+
+const DEFAULT_ICON = FaIcons.FaCode;
 
 const ServicesListPage = () => {
-  const [servicesList, setServicesList] = useState([]);
+  const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    fetch("/Services_content.csv")
-      .then((response) => {
-        if (!response.ok) {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch("/Services_content.csv");
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.text();
-      })
-      .then((text) => {
+
+        const text = await response.text();
         Papa.parse(text, {
           header: true,
           skipEmptyLines: true,
@@ -29,87 +45,104 @@ const ServicesListPage = () => {
             const validServices = results.data.filter(
               (item) => item.slug && item.name
             );
-            setServicesList(validServices);
+            setServices(validServices);
             setLoading(false);
           },
-          error: (err) => {
-            console.error("Ошибка парсинга CSV:", err);
-            setError("Не удалось обработать данные услуг.");
-            setLoading(false);
+          error: (error) => {
+            throw new Error(`CSV parsing error: ${error.message}`);
           },
         });
-      })
-      .catch((err) => {
-        console.error("Ошибка загрузки CSV:", err);
-        setError("Не удалось загрузить список услуг.");
+      } catch (err) {
+        console.error("Failed to load services:", err);
+        setError("Не удалось загрузить список услуг");
         setLoading(false);
-      });
+      }
+    };
+
+    fetchServices();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-        <SEO title="Загрузка услуг... | Veles IT" />
-        <Loader2 className="animate-spin h-10 w-10 text-blue-600" />
-        <span className="ml-3 text-xl text-gray-600">Загрузка услуг...</span>
-      </div>
-    );
-  }
+  const getServiceIcon = (serviceName) => {
+    const lowerName = serviceName.toLowerCase();
+    const IconComponent =
+      Object.entries(SERVICE_ICONS).find(([key]) =>
+        lowerName.includes(key)
+      )?.[1] || DEFAULT_ICON;
 
-  if (error) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-        <SEO title="Ошибка | Veles IT" />
-        <span className="text-xl text-red-600">{error}</span>
-      </div>
-    );
-  }
+    return <IconComponent className="service-icon" />;
+  };
+
+  if (loading) return <LoadingScreen />;
+  if (error) return <ErrorScreen message={error} />;
 
   return (
-    <div className="services-list-page cyber-page">
+    <div className="services-list-page">
       <SEO
         title="Наши Услуги | Veles IT"
-        description="Ознакомьтесь со всеми IT-услугами от Veles IT: веб-разработка, искусственный интеллект, блокчейн, SMM, SEO, дизайн, кибербезопасность и многое другое."
-        keywords="Veles IT, услуги, IT-услуги, веб-разработка, AI, блокчейн, SMM, SEO, дизайн, кибербезопасность"
+        description="IT-услуги: веб-разработка, AI, блокчейн, SMM, SEO, дизайн, кибербезопасность"
+        keywords="IT услуги, разработка, AI, блокчейн, SMM, SEO, дизайн"
       />
 
-      <section className="services-list-hero cyber-hero">
-        <div className="container">
-          <h1 className="contacts-title">Наши Услуги</h1>
-          <p className="subtitle">
-            Комплексные IT-решения для развития вашего бизнеса в цифровую эпоху.
-          </p>
-        </div>
-      </section>
+      <ServicesHero />
 
-      <section className="services-list-grid-section cyber-services">
+      <main className="services-main">
         <div className="container">
           <h2 className="section-title">Обзор Услуг</h2>
-          <div className="services-grid1">
-            {servicesList.map((service) => {
-              const serviceDataForCard = {
-                title: service.name,
-                description: service.description,
-                image: service.ogImage || "/images/service-placeholder.png",
-                price: service.price || "",
-              };
-              return (
-                <Link
-                  to={`/services/${service.slug}`}
-                  key={service.slug}
-                  className="service-card-link"
-                  style={{ textDecoration: "none" }}
-                >
-                  <ServiceCard service={serviceDataForCard} />
-                </Link>
-              );
-            })}
+          <div className="services-grid">
+            {services.map((service) => (
+              <ServiceCard
+                key={service.slug}
+                service={service}
+                icon={getServiceIcon(service.name)}
+              />
+            ))}
           </div>
-          {servicesList.length === 0 && !loading && <p>Услуги не найдены.</p>}
+          {services.length === 0 && <NoServicesMessage />}
         </div>
-      </section>
+      </main>
+      <CalculatorBtn />
     </div>
   );
 };
+
+const LoadingScreen = () => (
+  <div className="loading-screen">
+    <Loader2 className="spinner" />
+    <span className="loading-text">Загрузка услуг...</span>
+  </div>
+);
+
+const ErrorScreen = ({ message }) => (
+  <div className="error-screen">
+    <span className="error-text">{message}</span>
+  </div>
+);
+
+const ServicesHero = () => (
+  <section className="services-hero">
+    <div className="container">
+      <h1>Наши Услуги</h1>
+      <p className="hero-subtitle">
+        Комплексные IT-решения для развития вашего бизнеса
+      </p>
+    </div>
+  </section>
+);
+
+const ServiceCard = ({ service, icon }) => (
+  <Link to={`/services/${service.slug}`} className="service-card">
+    <div className="service-icon-container">{icon}</div>
+    <div className="service-content">
+      <h3>{service.name}</h3>
+      <p className="service-description">{service.description}</p>
+      <div className="service-price">от {service.price || ""}</div>
+    </div>
+    <div className="service-hover-effect"></div>
+  </Link>
+);
+
+const NoServicesMessage = () => (
+  <p className="no-services">Услуги не найдены</p>
+);
 
 export default ServicesListPage;
