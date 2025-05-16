@@ -20,6 +20,7 @@ import academyAnimation from "../animations/Mortarboard.json";
 import villageAnimation from "../animations/planet.json";
 import contactAnim from "../animations/Contact.json";
 
+import "./Navbar.css";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
@@ -68,18 +69,18 @@ export default function Navbar() {
       animation: clientsAnimation,
       id: "clients",
     },
-    {
-      name: "Веб-академия",
-      path: "/academy",
-      animation: academyAnimation,
-      id: "academy",
-    },
-    {
-      name: "IT деревня",
-      path: "/ItHomes",
-      animation: villageAnimation,
-      id: "village",
-    },
+    // {
+    //   name: "Веб-академия",
+    //   path: "/academy",
+    //   animation: academyAnimation,
+    //   id: "academy",
+    // },
+    // {
+    //   name: "IT деревня",
+    //   path: "/ItHomes",
+    //   animation: villageAnimation,
+    //   id: "village",
+    // },
     {
       name: "Контакты",
       path: "/Contacts",
@@ -180,6 +181,44 @@ export default function Navbar() {
               className="logo-image"
             />
           </Link>
+
+          {/* <nav className="top-nav">
+            <div
+              className="top-nav-dropdown"
+              onMouseEnter={() => setActiveSubmenu("services")}
+              onMouseLeave={() => setActiveSubmenu(null)}
+            >
+              <Link to="/services" className="top-nav-link dropdown-toggle">
+                Услуги{" "}
+                <FaChevronDown
+                  className={`dropdown-icon ${
+                    activeSubmenu === "services" ? "rotated" : ""
+                  }`}
+                />
+              </Link>
+              {activeSubmenu === "services" && (
+                <div className="top-nav-dropdown-menu">
+                  {services
+                    .find((s) => s.id === "services")
+                    .subServices.map((service) => (
+                      <Link
+                        key={service.path}
+                        to={service.path}
+                        className="top-nav-dropdown-item"
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </div>
+            <Link to="/clients" className="top-nav-link">
+              Клиенты
+            </Link>
+            <Link to="/Contacts" className="top-nav-link">
+              Контакты
+            </Link>
+          </nav> */}
 
           <div className="navbar-right-group">
             {!isMobile && (

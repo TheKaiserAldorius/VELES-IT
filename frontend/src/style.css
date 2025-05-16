@@ -6877,7 +6877,8 @@ button[type="submit"]:disabled {
 }
 
 .contact-item:hover {
-  opacity: 0.4;
+  color: var(--accent-green);
+  opacity: 0.8;
 }
 
 .contact-item a {
