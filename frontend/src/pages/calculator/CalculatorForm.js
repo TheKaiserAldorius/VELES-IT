@@ -27,7 +27,6 @@ const CalculatorForm = () => {
     loadServices();
   }, []);
 
-  // Расчет стоимости
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.service || !form.subcategory) return;
@@ -73,7 +72,6 @@ const CalculatorForm = () => {
 
   return (
     <div className="calculator-form">
-      <h2>Калькулятор услуг VelesIT</h2>
       {error && <div className="error">{error}</div>}
 
       <form onSubmit={handleSubmit}>
@@ -176,6 +174,7 @@ const CalculatorForm = () => {
           </p>
         </div>
       )}
+
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SiTelegram } from "react-icons/si";
 import {
   FaBars,
@@ -20,8 +20,8 @@ import academyAnimation from "../animations/Mortarboard.json";
 import villageAnimation from "../animations/planet.json";
 import contactAnim from "../animations/Contact.json";
 
-import "./Navbar.css";
 export default function Navbar() {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   const [language, setLanguage] = useState("Русский");
@@ -170,6 +170,20 @@ export default function Navbar() {
     setActiveMobileSubmenu(activeMobileSubmenu === id ? null : id);
   };
 
+  const handleContactClick = (event) => {
+    event.preventDefault();
+    navigate("/");
+    setTimeout(() => {
+      const contactsElement = document.getElementById("contacts");
+      if (contactsElement) {
+        contactsElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      if (isMobile) {
+        setIsMenuOpen(false);
+      }
+    }, 100);
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -181,44 +195,6 @@ export default function Navbar() {
               className="logo-image"
             />
           </Link>
-
-          {/* <nav className="top-nav">
-            <div
-              className="top-nav-dropdown"
-              onMouseEnter={() => setActiveSubmenu("services")}
-              onMouseLeave={() => setActiveSubmenu(null)}
-            >
-              <Link to="/services" className="top-nav-link dropdown-toggle">
-                Услуги{" "}
-                <FaChevronDown
-                  className={`dropdown-icon ${
-                    activeSubmenu === "services" ? "rotated" : ""
-                  }`}
-                />
-              </Link>
-              {activeSubmenu === "services" && (
-                <div className="top-nav-dropdown-menu">
-                  {services
-                    .find((s) => s.id === "services")
-                    .subServices.map((service) => (
-                      <Link
-                        key={service.path}
-                        to={service.path}
-                        className="top-nav-dropdown-item"
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                </div>
-              )}
-            </div>
-            <Link to="/clients" className="top-nav-link">
-              Клиенты
-            </Link>
-            <Link to="/Contacts" className="top-nav-link">
-              Контакты
-            </Link>
-          </nav> */}
 
           <div className="navbar-right-group">
             {!isMobile && (
@@ -270,71 +246,10 @@ export default function Navbar() {
       </nav>
 
       <aside
-        className={`side-menu ${isMobile ? "mobile" : "desktop"} ${
-          isMenuOpen ? "open" : ""
-        }`}
+        className={`side-menu ${isMobile ? "mobile" : "desktop"} ${isMenuOpen ? "open" : ""
+          }`}
       >
         <div className="menu-content">
-          {isMobile && (
-            <div className="mobile-contacts">
-              {/* <div className="language-selector mobile">
-                <button
-                  className="language-toggle"
-                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-                >
-                  <FaGlobe className="language-icon" />
-                  <span>{language}</span>
-                </button>
-
-                {showLanguageDropdown && (
-                  <div className="language-dropdown mobile">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        className="language-option"
-                        onClick={() => handleLanguageChange(lang)}
-                      >
-                        {lang.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div> */}
-
-              {/* Отдельный элемент для ссылки на Telegram */}
-              <div className="contact-item">
-                <a
-                  href="https://t.me/veles_it"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Telegram Veles IT"
-                >
-                  <SiTelegram className="contact-icon" />
-                  {/* Можно добавить текст, если нужно, например 'Наш Telegram' */}
-                </a>
-              </div>
-
-              {/* Отдельный элемент для ссылки на телефон */}
-              <div className="contact-item">
-                <a href="tel:+79169892974">
-                  {/* Можно добавить иконку телефона, если есть */}
-                  +7 916 989 2974
-                </a>
-              </div>
-
-              <div className="contact-item">
-                <a href="mailto:start@veles-it.pro">
-                  {/* Можно добавить иконку почты */}
-                  start@veles-it.pro
-                </a>
-              </div>
-
-              <div className="contact-item">
-                <FaMapMarkerAlt className="contact-icon" />
-                <span>г. Москва, ул. Социалистическая д. 88 оф. 302</span>
-              </div>
-            </div>
-          )}
 
           <div className="menu-section">
             {services.map((service) => (
@@ -421,7 +336,7 @@ export default function Navbar() {
                       if (service.path.startsWith("/#")) {
                         handleScrollToAnchor(e, service.path.substring(1));
                       } else if (service.id === "contact") {
-                        handleScrollToFooter(e);
+                        handleContactClick(e);
                       } else {
                         if (isMobile) {
                           setIsMenuOpen(false);
@@ -454,9 +369,8 @@ export default function Navbar() {
 
                 {service.subServices && !isMobile && (
                   <div
-                    className={`submenu services-submenu ${
-                      activeSubmenu === service.id ? "active" : ""
-                    }`}
+                    className={`submenu services-submenu ${activeSubmenu === service.id ? "active" : ""
+                      }`}
                     onMouseEnter={handleMouseEnterSubmenu}
                     onMouseLeave={handleMouseLeaveSubmenu}
                   >
@@ -475,12 +389,69 @@ export default function Navbar() {
               </div>
             ))}
           </div>
+
+          {isMobile && (
+            <div className="mobile-contacts">
+              {/* <div className="language-selector mobile">
+                <button
+                  className="language-toggle"
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                >
+                  <FaGlobe className="language-icon" />
+                  <span>{language}</span>
+                </button>
+
+                {showLanguageDropdown && (
+                  <div className="language-dropdown mobile">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        className="language-option"
+                        onClick={() => handleLanguageChange(lang)}
+                      >
+                        {lang.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div> */}
+
+              <div className="contact-item">
+                <a
+                  href="https://t.me/veles_it"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Telegram Veles IT"
+                >
+                  <SiTelegram className="contact-icon" />
+                </a>
+              </div>
+
+              <div className="contact-item">
+                <a href="tel:+79169892974">
+                  +7 916 989 2974
+                </a>
+              </div>
+
+              <div className="contact-item">
+                <a href="mailto:start@veles-it.pro">
+                  start@veles-it.pro
+                </a>
+              </div>
+
+              <div className="contact-item">
+                <FaMapMarkerAlt className="contact-icon" />
+                <span>г. Москва, ул. Социалистическая д.88 оф.302</span>
+              </div>
+            </div>
+          )}
         </div>
       </aside>
 
-      {isMobile && isMenuOpen && (
-        <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />
-      )}
+      <div
+        className={`menu-overlay ${isMenuOpen && isMobile ? "active" : ""}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
     </>
   );
 }

@@ -1,49 +1,84 @@
 // pages/clients/Clients.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO/SEO";
+import OrderBtn from "../../components/OrderBtn/OrderBtn";
 
 const ClientsPage = () => {
+  const [loadedImages, setLoadedImages] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
   const clients = [
     {
       name: "Роснефть",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Rosneft_Logo.svg/1200px-Rosneft_Logo.svg.png",
+      logo: "/images/rosneft.png",
       description: "Крупнейшая нефтяная компания России",
       link: "https://www.rosneft.ru",
     },
     {
       name: "Сбербанк",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sberbank_Logo_2020.svg/1200px-Sberbank_Logo_2020.svg.png",
+      logo: "/images/sber.png",
       description: "Крупнейший банк России и Восточной Европы",
       link: "https://www.sberbank.ru",
     },
     {
       name: "Газпром",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Gazprom-Logo.svg/1200px-Gazprom-Logo.svg.png",
+      logo: "/images/gazprom.png",
       description: "Глобальная энергетическая компания",
       link: "https://www.gazprom.ru",
     },
     {
       name: "Яндекс",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Yandex.svg/1200px-Yandex.svg.png",
+      logo: "/images/yandex.png",
       description:
         "Технологическая компания, владеющая одноимённой системой поиска в Сети",
       link: "https://yandex.ru",
     },
     {
       name: "МТС",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/MTS_logo_2016.svg/1200px-MTS_logo_2016.svg.png",
+      logo: "/images/mts.png",
       description: "Крупнейший российский оператор мобильной связи",
       link: "https://www.mts.ru",
     },
     {
       name: "РЖД",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/RZD_logo_2016.svg/1200px-RZD_logo_2016.svg.png",
+      logo: "/images/RZD.png",
       description:
         "Российские железные дороги - национальный железнодорожный перевозчик",
       link: "https://www.rzd.ru",
     },
   ];
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = clients.map((client) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = client.logo;
+          img.onload = () => {
+            setLoadedImages((prev) => ({
+              ...prev,
+              [client.name]: true,
+            }));
+            resolve();
+          };
+          img.onerror = () => {
+            console.error(`Ошибка загрузки изображения для ${client.name}`);
+            setLoadedImages((prev) => ({
+              ...prev,
+              [client.name]: false,
+            }));
+            resolve();
+          };
+        });
+      });
+
+      await Promise.all(promises);
+      setIsLoading(false);
+    };
+
+    preloadImages();
+  }, []);
 
   return (
     <div className="clients-page">
@@ -61,25 +96,17 @@ const ClientsPage = () => {
 
       <section className="clients-section">
         <div className="section-container">
-          <div className="clients-header">
-            <h2>С кем мы работаем</h2>
-            <p className="section-subtitle">
-              Ведущие компании в своих отраслях
-            </p>
-          </div>
-
-          <div className="clients-grid">
+          <div className="clients-grid" style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.5s ease' }}>
             {clients.map((client, index) => (
               <div key={index} className="client-card">
-                <div className="client-logo-container">
+                <div className={`client-logo-container ${loadedImages[client.name] ? 'loaded' : ''}`}>
                   <img
                     src={client.logo}
                     alt={client.name}
                     className="client-logo"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://via.placeholder.com/150x80?text=No+Logo";
+                    style={{
+                      opacity: loadedImages[client.name] ? 1 : 0,
+                      transition: 'opacity 0.5s ease'
                     }}
                   />
                 </div>
@@ -92,7 +119,7 @@ const ClientsPage = () => {
                     rel="noopener noreferrer"
                     className="client-link"
                   >
-                    Посетить сайт →
+                    Посетить сайт
                   </a>
                 </div>
               </div>
@@ -101,15 +128,7 @@ const ClientsPage = () => {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="section-container">
-          <h2>Хотите стать нашим клиентом?</h2>
-          <p>Оставьте заявку и мы свяжемся с вами для обсуждения проекта</p>
-          <Link to="/contacts" className="cta-button">
-            Оставить заявку
-          </Link>
-        </div>
-      </section>
+      <OrderBtn />
     </div>
   );
 };

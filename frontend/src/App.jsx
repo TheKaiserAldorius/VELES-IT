@@ -42,6 +42,7 @@ import AboutSection from "components/Aboutsection";
 import WebAcademy from "./pages/WebAcademy/WebAcademy";
 import CasesSection from "components/CaseSection/CasesSection";
 import SEO from "./components/SEO/SEO.jsx";
+// import ClientsArticle from "components/ClientsArticle/ClientsArticle";
 
 // Приватный маршрут
 const PrivateRoute = ({ children }) => {
@@ -95,6 +96,10 @@ const HomePage = () => {
 
       <AboutSection />
       <CasesSection />
+      {/* <ClientsArticle /> */}
+      <section id="contacts" className="contacts-section">
+        <ContactForm />
+      </section>
 
       {/* Changed div to ul/li for services list */}
       {/* Ensure CSS resets list styles (bullets, padding) if needed */}

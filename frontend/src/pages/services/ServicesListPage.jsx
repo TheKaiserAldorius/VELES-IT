@@ -4,7 +4,7 @@ import Papa from "papaparse";
 import { Loader2 } from "lucide-react";
 import * as FaIcons from "react-icons/fa";
 import SEO from "../../components/SEO/SEO";
-import CalculatorBtn from "../../components/CalculatorBtn/CalculatorBtn";
+import CalculatorBtn from "../../components/OrderBtn/OrderBtn";
 // Маппинг иконок для сервисов
 const SERVICE_ICONS = {
   разработка: FaIcons.FaCode,
@@ -87,7 +87,6 @@ const ServicesListPage = () => {
 
       <main className="services-main">
         <div className="container">
-          <h2 className="section-title">Обзор Услуг</h2>
           <div className="services-grid">
             {services.map((service) => (
               <ServiceCard

@@ -31,7 +31,7 @@ const Footer = () => {
               <iframe
                 src={mapUrl}
                 width="100%"
-                height="200"
+                height="350"
                 frameBorder="0"
                 allowFullScreen={true}
                 style={{ border: 0, borderRadius: "8px", overflow: "hidden" }}
@@ -64,6 +64,11 @@ const Footer = () => {
                 <FaMapMarkerAlt className="footer-list-icon" />
                 <span>{address}</span>
               </li>
+              <li className="footer-list-item">
+                <span className="footer-copyright">
+                  © {new Date().getFullYear()} velestIT - ООО ВЕЛЕС-АЙТИ
+                </span>
+              </li>
             </ul>
             <a
               href="https://t.me/veles_it"
@@ -76,10 +81,6 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
-        <div className="footer-divider"></div>
-
-        <div className="footer-copyright">© 2025 velestIT - ООО ВЕЛЕС-АЙТИ</div>
       </div>
     </footer>
   );
