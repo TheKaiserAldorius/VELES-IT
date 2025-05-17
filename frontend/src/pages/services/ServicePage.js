@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Papa from "papaparse";
 import { Loader2 } from "lucide-react";
 import SEO from "../../components/SEO/SEO";
-import CalculatorBtn from "../../components/CalculatorBtn/CalculatorBtn";
+import OrderBtn from "../../components/OrderBtn/OrderBtn";
 
 const ServicePage = () => {
   const { slug } = useParams();
@@ -76,7 +76,7 @@ const ServicePage = () => {
           />
         </div>
       </div>
-      <CalculatorBtn />
+      <OrderBtn />
     </div>
   );
 };

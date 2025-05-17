@@ -4,29 +4,77 @@ import axios from "axios";
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     comment: "",
   });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+  });
+
   const [status, setStatus] = useState({
     loading: false,
     success: false,
     error: null,
   });
 
+  const validateField = (name, value) => {
+    switch (name) {
+      case "name":
+        return value.trim() === "" ? "Пожалуйста, введите ваше имя" : "";
+      case "email":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (value.trim() === "") {
+          return "Пожалуйста, введите email";
+        } else if (!emailRegex.test(value)) {
+          return "Пожалуйста, введите корректный email";
+        }
+        return "";
+      default:
+        return "";
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    if (name === "name" || name === "email") {
+      setErrors({ ...errors, [name]: validateField(name, value) });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const nameError = validateField("name", formData.name);
+    const emailError = validateField("email", formData.email);
+
+    setErrors({
+      name: nameError,
+      email: emailError,
+    });
+
+    if (nameError || emailError) {
+      return;
+    }
+
     setStatus({ loading: true, success: false, error: null });
 
     try {
       const response = await axios.post("/api/trello/create-card", {
         name: formData.name,
+        email: formData.email,
         phone: formData.phone,
         comment: formData.comment,
       });
 
       if (response.data.status === "success") {
         setStatus({ loading: false, success: true, error: null });
-        setFormData({ name: "", phone: "", comment: "" });
+        setFormData({ name: "", email: "", phone: "", comment: "" });
+        setErrors({ name: "", email: "" });
       } else {
         setStatus({
           loading: false,
@@ -45,7 +93,7 @@ const ContactForm = () => {
 
   return (
     <div className="contact-form-container">
-      <h2>Оставить заявку</h2>
+      <h2>Контакты</h2>
 
       {status.success && (
         <div className="alert success">Заявка успешно отправлена!</div>
@@ -59,10 +107,23 @@ const ContactForm = () => {
             type="text"
             name="name"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="Ваше имя"
-            required
+            onChange={handleChange}
+            placeholder="Ваше имя *"
+            className={errors.name ? "error-input" : ""}
           />
+          {errors.name && <div className="error-text">{errors.name}</div>}
+        </div>
+
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email *"
+            className={errors.email ? "error-input" : ""}
+          />
+          {errors.email && <div className="error-text">{errors.email}</div>}
         </div>
 
         <div className="form-group">
@@ -70,11 +131,8 @@ const ContactForm = () => {
             type="tel"
             name="phone"
             value={formData.phone}
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
-            placeholder="Ваш телефон"
-            required
+            onChange={handleChange}
+            placeholder="Телефон (необязательно)"
           />
         </div>
 
@@ -82,16 +140,14 @@ const ContactForm = () => {
           <textarea
             name="comment"
             value={formData.comment}
-            onChange={(e) =>
-              setFormData({ ...formData, comment: e.target.value })
-            }
-            placeholder="Комментарий (необязательно)"
+            onChange={handleChange}
+            placeholder="Ваше сообщение"
             rows="3"
           />
         </div>
 
         <button type="submit" disabled={status.loading} className="submit-btn">
-          {status.loading ? "Отправка..." : "Отправить заявку"}
+          {status.loading ? "Отправка..." : "Отправить"}
         </button>
       </form>
     </div>

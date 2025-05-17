@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SEO from "../../components/SEO/SEO";
 import * as FaIcons from "react-icons/fa";
+import OrderBtn from "../../components/OrderBtn/OrderBtn";
 
 const CASE_ICONS = {
   "веб-разработка": FaIcons.FaCode,
@@ -110,13 +111,6 @@ const CasesPage = () => {
 
       <section className="cases-section">
         <div className="section-container">
-          <div className="cases-header">
-            <h2>Реализованные проекты</h2>
-            <p className="section-subtitle">
-              Каждый проект - это уникальное решение под конкретные задачи
-              клиента
-            </p>
-          </div>
 
           <div className="cases-grid">
             {cases.map((caseItem, index) => (
@@ -144,15 +138,7 @@ const CasesPage = () => {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="section-container">
-          <h2>Хотите такой же результат?</h2>
-          <p>Оставьте заявку и мы обсудим ваш проект</p>
-          <Link to="/contacts" className="cta-button">
-            Обсудить проект
-          </Link>
-        </div>
-      </section>
+      <OrderBtn />
     </div>
   );
 };
